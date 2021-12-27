@@ -31,68 +31,12 @@
                 </div>
                 <x-table>
                     <x-slot name="thead">
-                        <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('id')" :direction="$sortField === 'id' ? $sortDirection : null">
-                                #
-                                @if($sortDirection === 'desc' && $sortField === 'id')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
-                        <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">
-                                Name
-                                @if($sortDirection === 'desc' && $sortField === 'name')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
-                        <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Email
-                                @if($sortDirection === 'desc' && $sortField === 'email')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
-                        <x-table-th>
-                            <a>Telephone</a>
-                        </x-table-th>
-                        <x-table-th>
-                            <a>City</a>
-                        </x-table-th>
-                        <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('function')" :direction="$sortField === 'function' ? $sortDirection : null">
-                                Function
-                                @if($sortDirection === 'desc' && $sortField === 'function')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
+                        <x-table-th>#</x-table-th>
+                        <x-table-th>Name</x-table-th>
+                        <x-table-th>Email</x-table-th>
+                        <x-table-th>Telephone</x-table-th>
+                        <x-table-th>City</x-table-th>
+                        <x-table-th>Function</x-table-th>
                         <x-table-th>Manage</x-table-th>
                     </x-slot>
                     @forelse($users as $user)

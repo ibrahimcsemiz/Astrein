@@ -12,14 +12,6 @@ class UserComponent extends Component
 
     public $search = '';
     public $function = '';
-    public $sortField = 'id';
-    public $sortDirection = 'asc';
-
-    public $queryString = [
-        'search' => ['except' => ''],
-        'function' => ['except' => ''],
-        'page' => ['except' => 1]
-    ];
 
     public function updatingSearch()
     {
@@ -31,18 +23,10 @@ class UserComponent extends Component
         $this->resetPage();
     }
 
-    public function sortBy($field)
-    {
-        $this->sortDirection = $this->sortField === $field
-            ? $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc'
-            : 'asc';
-
-        $this->sortField = $field;
-    }
-
     public function render()
     {
-        $users = User::when($this->function, function ($users) {
+        $users = User::orderByDesc('created_at')
+            ->when($this->function, function ($users) {
                 $users->where('function', '=', $this->function);
             })
             ->when($this->search, function ($users) {
@@ -59,7 +43,6 @@ class UserComponent extends Component
             })
             ->with('contact')
             ->with('personal')
-            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(25);
 
         return view('livewire.user-component', [
