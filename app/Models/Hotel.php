@@ -23,7 +23,7 @@ class Hotel extends Model
 
     public static function exists($id)
     {
-        return self::where('id', $id)->count() > 0;
+        return self::findOrFail($id);
     }
 
     public function employees()

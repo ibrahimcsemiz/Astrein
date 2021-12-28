@@ -71,12 +71,14 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        if (!Hotel::exists($id)) {
+        $hotel = Hotel::exists($id);
+
+        if (!$hotel) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
         return view('hotels.show', [
-            'data' => Hotel::where('id', $id)->with('manager')->with('foreman')->with('region')->get(),
+            'data' => $hotel->with('manager')->with('foreman')->with('region')->get(),
         ]);
     }
 
@@ -88,10 +90,10 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
-        $hotel = Hotel::findOrFail($id);
+        $hotel = Hotel::exists($id);
 
         if (!$hotel) {
-            redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
+            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
         $users = User::all();
@@ -113,11 +115,11 @@ class HotelController extends Controller
      */
     public function update(UpdateHotelRequest $request, $id)
     {
-        if (!Hotel::exists($id)) {
+        $hotel = Hotel::exists($id);
+
+        if (!$hotel) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
-
-        $hotel = Hotel::where('id', $id)->first();
 
         $updateHotel = $hotel->update([
             'name' => Str::title($request->input('name')),
@@ -145,11 +147,13 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        if (!Hotel::exists($id)) {
+        $hotel = Hotel::exists($id);
+
+        if (!$hotel) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
-        $deleteHotel = Hotel::where('id', $id)->delete();
+        $deleteHotel = $hotel->delete();
 
         if ($deleteHotel) {
             return redirect(url('hotels'))->with('status', 'success')->with('message', 'The operation was successful.');
