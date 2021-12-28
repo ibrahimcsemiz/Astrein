@@ -7,8 +7,6 @@ use App\Http\Requests\Hotel\UpdateHotelRequest;
 use App\Models\Hotel;
 use App\Models\Region;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class HotelController extends Controller
@@ -30,13 +28,11 @@ class HotelController extends Controller
      */
     public function create()
     {
-        $managers = User::getUsersByFunction('Manager');
-        $foremans = User::getUsersByFunction('Foreman');
+        $users = User::all();
         $regions = Region::all();
 
         return view('hotels.create', [
-            'managers' => $managers,
-            'foremans' => $foremans,
+            'users' => $users,
             'regions' => $regions,
         ]);
     }
