@@ -23,20 +23,15 @@ class EmployeeComponent extends Component
 
     public function destroy($id)
     {
-        if (HotelUser::exists($id, $this->hotelId, '')) {
-            $deleteHotelUser = HotelUser::where('user_id', $id)
-                ->where('hotel_id', $this->hotelId)
-                ->delete();
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->hotel()->detach($this->hotelId);
 
-            if ($deleteHotelUser) {
-                $this->resetPage();
+            $this->resetPage();
 
-                session()->flash('status', 'success');
-                session()->flash('message', 'The operation was successful.');
-            } else {
-                session()->flash('status', 'error');
-                session()->flash('message', 'An error occurred during the operation.');
-            }
+            session()->flash('status', 'success');
+            session()->flash('message', 'The operation was successful.');
+
         } else {
             session()->flash('status', 'error');
             session()->flash('message', 'An error occurred during the operation.');
@@ -45,27 +40,16 @@ class EmployeeComponent extends Component
 
     public function store($id)
     {
-        if (User::exists($id)) {
-            if (HotelUser::exists($id, $this->hotelId, 'idle')) {
-                //$user = User::findOrFail($id);
-                //$user->hotel()->attach($this->hotelId);
-                $insertHotelUser = HotelUser::create([
-                    'user_id' => $id,
-                    'hotel_id' => $this->hotelId
-                ]);
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->hotel()->attach($this->hotelId, [
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            $user->hotel()->syncWithoutDetaching([$this->hotelId]);
 
-                if ($insertHotelUser) {
-
-                    session()->flash('status', 'success');
-                    session()->flash('message', 'The operation was successful.');
-                } else {
-                    session()->flash('status', 'error');
-                    session()->flash('message', 'An error occurred during the operation.');
-                }
-            } else {
-                session()->flash('status', 'error');
-                session()->flash('message', 'An error occurred during the operation.');
-            }
+            session()->flash('status', 'success');
+            session()->flash('message', 'The operation was successful.');
         } else {
             session()->flash('status', 'error');
             session()->flash('message', 'An error occurred during the operation.');

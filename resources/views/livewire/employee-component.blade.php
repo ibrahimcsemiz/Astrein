@@ -24,7 +24,7 @@
                 @forelse($idles as $idle)
                     <tr>
                         <x-table-column>
-                            @if(isset($idle->hotel[0]) && $idle->hotel[0]->id == $id)
+                            @if(in_array($id, $idle->hotel->pluck('id')->toArray()))
                                 <a wire:click="destroy({{ $idle->id }})" class="text-red-600" style="cursor: pointer;">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -40,9 +40,9 @@
                         </x-table-column>
                         <x-table-column>{{ $idle->name }}</x-table-column>
                         <x-table-column>{{ $idle->email }}</x-table-column>
-                        <x-table-column>{{ $idle->contact->telephone ?? '-' }}</x-table-column>
-                        <x-table-column>{{ $idle->contact->city ?? '-' }}</x-table-column>
-                        <x-table-column>{{ $idle->hotel[0]->name ?? '-' }}</x-table-column>
+                        <x-table-column>{{ $idle->contact->telephone ?? '' }}</x-table-column>
+                        <x-table-column>{{ $idle->contact->city ?? '' }}</x-table-column>
+                        <x-table-column>{{ $idle->hotel->pluck('name')->implode(', ') }}</x-table-column>
                         <x-table-column>
                             <a href="{{ route('users.edit', $idle->id) }}" class="text-indigo-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

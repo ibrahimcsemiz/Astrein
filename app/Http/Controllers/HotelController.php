@@ -79,15 +79,8 @@ class HotelController extends Controller
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
-        $managers = User::getUsersByFunction('Manager');
-        $foremans = User::getUsersByFunction('Foreman');
-        $regions = Region::all();
-
         return view('hotels.show', [
             'data' => Hotel::where('id', $id)->with('manager')->with('foreman')->with('region')->get(),
-            'managers' => $managers,
-            'foremans' => $foremans,
-            'regions' => $regions,
         ]);
     }
 
