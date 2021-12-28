@@ -28,7 +28,7 @@
                                           data-allow-clear="false"
                                           title="Select a manager" required>
                                     <option value=""></option>
-                                    @foreach($users->where('function', 'Manager') as $manager)
+                                    @foreach($managers as $manager)
                                         <option value="{{ $manager->id }}">{{ $manager->name }}</option>
                                     @endforeach
                                 </x-select>
@@ -39,7 +39,7 @@
                                           data-allow-clear="false"
                                           title="Select a foreman" required>
                                     <option value=""></option>
-                                    @foreach($users->where('function', 'Foreman') as $foreman)
+                                    @foreach($foremans as $foreman)
                                         <option value="{{ $foreman->id }}">{{ $foreman->name }}</option>
                                     @endforeach
                                 </x-select>

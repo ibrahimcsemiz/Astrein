@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public static function exists($id)
     {
-        return self::findOrFail($id);
+        return self::where('id', $id)->count() > 0;
     }
 
     public function hotel()

@@ -28,11 +28,14 @@ class HotelController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::whereIn('function', ['Manager', 'Foreman'])
+            ->get();
+
         $regions = Region::all();
 
         return view('hotels.create', [
-            'users' => $users,
+            'managers' => $users->where('function', 'Manager'),
+            'foremans' => $users->where('function', 'Foreman'),
             'regions' => $regions,
         ]);
     }
@@ -71,14 +74,12 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        $hotel = Hotel::exists($id);
-
-        if (!$hotel) {
+        if (!Hotel::exists($id)) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
         return view('hotels.show', [
-            'data' => $hotel->with('manager')->with('foreman')->with('region')->get(),
+            'data' => Hotel::where('id', $id)->with('manager')->with('foreman')->with('region')->get(),
         ]);
     }
 
@@ -90,18 +91,19 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
-        $hotel = Hotel::exists($id);
-
-        if (!$hotel) {
+        if (!Hotel::exists($id)) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
-        $users = User::all();
+        $users = User::whereIn('function', ['Manager', 'Foreman'])
+            ->get();
+
         $regions = Region::all();
 
         return view('hotels.edit', [
-            'data' => $hotel->get(),
-            'users' => $users,
+            'data' => Hotel::where('id', $id)->get(),
+            'managers' => $users->where('function', 'Manager'),
+            'foremans' => $users->where('function', 'Foreman'),
             'regions' => $regions,
         ]);
     }
@@ -115,11 +117,11 @@ class HotelController extends Controller
      */
     public function update(UpdateHotelRequest $request, $id)
     {
-        $hotel = Hotel::exists($id);
-
-        if (!$hotel) {
+        if (!Hotel::exists($id)) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
+
+        $hotel = Hotel::where('id', $id)->first();
 
         $updateHotel = $hotel->update([
             'name' => Str::title($request->input('name')),
@@ -147,13 +149,11 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        $hotel = Hotel::exists($id);
-
-        if (!$hotel) {
+        if (!Hotel::exists($id)) {
             return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
-        $deleteHotel = $hotel->delete();
+        $deleteHotel = Hotel::where('id', $id)->delete();
 
         if ($deleteHotel) {
             return redirect(url('hotels'))->with('status', 'success')->with('message', 'The operation was successful.');

@@ -75,7 +75,7 @@
                     @forelse($hotels as $hotel)
                         <tr>
                             <x-table-column>{{ $hotel->id }}</x-table-column>
-                            <x-table-column><a class="hover:text-indigo-600" href="{{ route('hotels.show', $hotel->id) }}">{{ $hotel->name }}</a></x-table-column>
+                            <x-table-column><a class="text-orange-800 hover:text-indigo-600" href="{{ route('hotels.show', $hotel->id) }}">{{ $hotel->name }}</a></x-table-column>
                             <x-table-column>{{ $hotel->email }}</x-table-column>
                             <x-table-column>{{ $hotel->telephone ?? '-' }}</x-table-column>
                             <x-table-column>{{ $hotel->region->name }}</x-table-column>

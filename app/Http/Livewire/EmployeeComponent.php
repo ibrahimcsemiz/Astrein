@@ -46,6 +46,7 @@ class EmployeeComponent extends Component
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
+
             $user->hotel()->syncWithoutDetaching([$this->hotelId]);
 
             session()->flash('status', 'success');
@@ -58,37 +59,26 @@ class EmployeeComponent extends Component
 
     public function render()
     {
-        $idles = User::orderByDesc('created_at')
-            ->where('function', 'Employee')
-            ->when($this->search, function ($users) {
-                $users->where(function ($users) {
-                    $users->where('name', 'like', '%' . $this->search . '%')
-                        ->orWhere('email', 'like', '%' . $this->search . '%')
-                        ->orWhereHas('contact', function ($users) {
-                            $users->where('telephone', 'like', '%' . $this->search . '%');
-                        })
-                        ->orWhereHas('contact', function ($users) {
-                            $users->where('city', 'like', '%' . $this->search . '%');
-                        });
-                });
-            })
-            ->with('hotel')
-            ->with('contact')
-            ->get();
-
         $employees = User::with('hotel')
-            ->whereHas('hotel', function ($users){
-                $users->where('hotel_id', $this->hotelId);
+            ->whereHas('hotel', function ($employees){
+                $employees->where('hotel_id', $this->hotelId);
             })
-            ->with('hotel')
-            ->with('contact')
             ->get();
 
-        $users = $employees->merge($idles)->paginate(25);
+        $employeeIds = $employees->pluck('id')->toArray();
+
+        if ($this->search && strlen($this->search) >= 3) {
+
+            $users = User::where('function', 'Employee')
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->whereNotIn('id', $employeeIds)
+                ->get();
+        }
 
         return view('livewire.employee-component', [
             'id' => $this->hotelId,
-            'idles' => $users
+            'employees' => $employees,
+            'users' => $users ?? [],
         ]);
     }
 }
