@@ -92,18 +92,18 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
-        if (!Hotel::exists($id)) {
-            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
+        $hotel = Hotel::findOrFail($id);
+
+        if (!$hotel) {
+            redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
         }
 
-        $managers = User::getUsersByFunction('Manager');
-        $foremans = User::getUsersByFunction('Foreman');
+        $users = User::all();
         $regions = Region::all();
 
         return view('hotels.edit', [
-            'data' => Hotel::where('id', $id)->with('manager')->with('foreman')->with('region')->get(),
-            'managers' => $managers,
-            'foremans' => $foremans,
+            'data' => $hotel->get(),
+            'users' => $users,
             'regions' => $regions,
         ]);
     }
