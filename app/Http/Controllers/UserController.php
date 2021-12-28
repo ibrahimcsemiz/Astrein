@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -97,12 +96,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (!User::exists($id)) {
+        $user = User::exists($id);
+
+        if (!$user) {
             return redirect(url('users'))->with('status', 'error')->with('message', 'User not found.');
         }
 
         return view('users.edit', [
-            'data' => User::where('id', $id)->with('contact')->with('personal')->get()
+            'data' => $user->with('contact')->with('personal')->get()
         ]);
     }
 
@@ -115,12 +116,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        if (!User::exists($id)) {
+        $user = User::exists($id);
+
+        if (!$user) {
             return redirect(url('users'))->with('status', 'error')->with('message', 'User not found.');
         }
 
-        $response = DB::transaction(function() use ($request, $id) {
-            $user = User::where('id', $id)->first();
+        $response = DB::transaction(function() use ($user, $request) {
 
             $updateUser = $user->update([
                 'name' => Str::title($request->input('name')),
@@ -164,11 +166,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if (!User::exists($id)) {
+        $user = User::exists($id);
+
+        if (!$user) {
             return redirect(url('users'))->with('status', 'error')->with('message', 'User not found.');
         }
 
-        $deleteUser = User::where('id', $id)->delete();
+        $deleteUser = $user->delete();
 
         if ($deleteUser) {
             return redirect(url('users'))->with('status', 'success')->with('message', 'The operation was successful.');

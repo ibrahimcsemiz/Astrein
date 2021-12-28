@@ -43,19 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function getUsersByFunction($function)
+    public static function exists($id)
     {
-        return self::where('function', $function)->get();
+        return self::findOrFail($id);
     }
 
     public function hotel()
     {
         return $this->belongsToMany(Hotel::class);
-    }
-
-    public static function exists($id)
-    {
-        return self::where('id', $id)->count() > 0;
     }
 
     public function contact()
