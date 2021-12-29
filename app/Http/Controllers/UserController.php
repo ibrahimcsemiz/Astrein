@@ -45,7 +45,8 @@ class UserController extends Controller
             $insertUser = User::create([
                 'name' => Str::title($request->input('name')),
                 'email' => $request->input('email'),
-                'function' => $request->input('function'),
+                'function' => 'Employee',
+                // 'function' => $request->input('function'),
                 'password' => Hash::make($password)
             ]);
 
@@ -127,7 +128,8 @@ class UserController extends Controller
             $updateUser = $user->update([
                 'name' => Str::title($request->input('name')),
                 'email' => $request->input('email'),
-                'function' => $request->input('function')
+                'function' => 'Employee',
+                // 'function' => $request->input('function')
             ]);
 
             // Updating Contact Information
