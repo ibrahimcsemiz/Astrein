@@ -37,7 +37,9 @@
                 </div>
             </div>
         </div>
-
-        <livewire:employee-component :hotelId="$data[0]->id" />
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
+            <livewire:employee-component :hotelId="$data[0]->id" />
+            <livewire:service-plan-component :hotelId="$data[0]->id" />
+        </div>
     </div>
 </x-app-layout>

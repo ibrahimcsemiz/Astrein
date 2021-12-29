@@ -25,6 +25,11 @@ class Hotel extends Model
         return self::findOrFail($id);
     }
 
+    public function servicePlans()
+    {
+        return $this->hasMany(ServicePlan::class);
+    }
+
     public function employees()
     {
         return $this->belongsToMany(User::class);

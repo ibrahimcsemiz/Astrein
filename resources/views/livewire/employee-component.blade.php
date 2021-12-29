@@ -1,55 +1,41 @@
-<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
-    <div class="w-1/3 mr-1">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white" style="overflow-x: auto; width: 100%;">
-                <x-input
-                    wire:model.debounce.100ms="search"
-                    id="search"
-                    class="block mb-2 w-full flex"
-                    type="text"
-                    placeholder="Search by employee name (Please type minimum 3 characters)" />
-                @if(strlen($search) >= 3)
-                    <div class="bg-gray-100">
-                        <ul>
-                        @forelse($users as $user)
-                            <a wire:click="store({{ $user->id }})" class="text-green-800" style="cursor: pointer;">
-                                <li class="p-2" style="list-style-type: none">
-                                    {{ $user->name }}
-                                </li>
-                            </a>
-                        @empty
-                            <li class="p-2" style="list-style-type: none">Not Found</li>
-                        @endforelse
-                        </ul>
-                    </div>
-                @endif
-            </div>
+<div class="w-1/3 mr-1">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white" style="overflow-x: auto; width: 100%;">
+            <x-input
+                wire:model.debounce.100ms="search"
+                id="search"
+                class="block mb-2 w-full flex"
+                type="text"
+                placeholder="Search by employee name (Please type minimum 3 characters)" />
+            @if(strlen($search) >= 3)
+                <div class="bg-gray-100">
+                    <ul>
+                    @forelse($users as $user)
+                        <a wire:click="store({{ $user->id }})" class="text-green-800" style="cursor: pointer;">
+                            <li class="p-2" style="list-style-type: none">
+                                {{ $user->name }}
+                            </li>
+                        </a>
+                    @empty
+                        <li class="p-2" style="list-style-type: none">Not Found</li>
+                    @endforelse
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
-
-    <div class="w-1/3 mr-1">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white" style="overflow-x: auto; width: 100%;">
-                <x-input
-                    wire:model.debounce.100ms="search"
-                    id="search"
-                    class="block w-full mb-2 mr-2 flex"
-                    type="text"
-                    placeholder="Search by employee name (Please type minimum 3 characters)" />
-            </div>
-        </div>
-    </div>
-
-    <div class="w-1/3">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white" style="overflow-x: auto; width: 100%;">
-                <h4 class="font-semibold text-lg text-gray-800 leading-tight">&middot; Employees</h4>
+</div>
+<div class="w-1/3 mr-1">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white" style="overflow-x: auto; width: 100%;">
+            <h4 class="font-semibold text-lg text-gray-800 leading-tight">Employees</h4>
+            @if(count($employees) > 0)
                 <x-table>
                     <x-slot name="thead">
                         <x-table-th>#</x-table-th>
                         <x-table-th>Name</x-table-th>
                     </x-slot>
-                    @forelse($employees as $employee)
+                    @foreach($employees as $employee)
                         <tr>
                             <x-table-column>
                                 @if(in_array($id, $employee->hotel->pluck('id')->toArray()))
@@ -75,24 +61,12 @@
                                     <a class="text-orange-800 hover:text-indigo-600" href="{{ route('users.show', $employee->id) }}">{{ $employee->name }}</a>
                                 </x-table-column>
                             @endif
-
                         </tr>
-                    @empty
-                        <tr>
-                            <x-table-column colspan="7">
-                                <div class="flex justify-center items-center">
-                                    <span class="py-12 text-gray-500 text-xl flex justify-center items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                        </svg>
-                                        Empty
-                                    </span>
-                                </div>
-                            </x-table-column>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </x-table>
-            </div>
+            @else
+                {{ 'Employee Not Found' }}
+            @endif
         </div>
     </div>
 </div>
