@@ -22,8 +22,6 @@ class EmployeeComponent extends Component
         if ($user) {
             $user->hotel()->detach($this->hotelId);
 
-            $this->resetPage();
-
             session()->flash('status', 'success');
             session()->flash('message', 'The operation was successful.');
 
