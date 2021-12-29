@@ -48,6 +48,7 @@
                         <x-table-th>City</x-table-th>
                         <x-table-th>Foreman</x-table-th>
                         <x-table-th>Manager</x-table-th>
+                        <x-table-th>Total Employees</x-table-th>
                         <x-table-th>Manage</x-table-th>
                     </x-slot>
                     @forelse($hotels as $hotel)
@@ -58,6 +59,7 @@
                             <x-table-column>{{ $hotel->city }}</x-table-column>
                             <x-table-column>{{ $hotel->foreman->name }}</x-table-column>
                             <x-table-column>{{ $hotel->manager->name }}</x-table-column>
+                            <x-table-column>{{ count($hotel->employees) }}</x-table-column>
                             <x-table-column>
                                 <a href="{{ route('hotels.edit', $hotel->id) }}" class="text-indigo-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
