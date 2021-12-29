@@ -19,7 +19,12 @@
                         id="name"
                         class="block w-full mb-2 mr-2 flex"
                         type="text"
-                        placeholder="Search by name, telephone, email or city" />
+                        placeholder="Search by name, telephone or hotel" />
+                    <x-select wire:model.live="status" class="block mb-2 mr-2 flex text-gray-500">
+                        <option value="">Search by status</option>
+                        <option value="1">Active</option>
+                        <option value="0">Deactive</option>
+                    </x-select>
                     <x-select wire:model.live="function" class="block mb-2 mr-2 flex text-gray-500">
                         <option value="">Search by function</option>
                         <option value="Employee">&middot; Employee</option>
@@ -63,13 +68,12 @@
                             <x-table-column>
                                 {{ $user->hotel->pluck('name')->implode(', ') }}
                             </x-table-column>
-                            <x-table-column>
-                                    <a wire:click="updateStatus" class="text-indigo-700 flex items-center">
-                                        {!! $user->status == 1 ? '<span class="text-green-600">Active</span>' : '<span class="text-red-600">Deactive</span>'; !!}
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
+                            <x-table-column class="{{ $user->status == 1 ? 'bg-green-200' : 'bg-red-200' }}">
+                                <a wire:click="updateStatus({{ $user->id }})" class="{{ $user->status == 1 ? 'text-red-600' : 'text-green-600' }} flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
                             </x-table-column>
                             <x-table-column>
                                 <a href="{{ route('users.edit', $user->id) }}" class="text-indigo-700">
