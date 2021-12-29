@@ -50,11 +50,5 @@
                 $('.select2picker').select2();
             });
         </script>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.select2picker').select2();
-            });
-        </script>
     </body>
 </html>
