@@ -43,7 +43,7 @@ class HotelComponent extends Component
 
     public function render()
     {
-        $hotels = Hotel::with('employees', 'manager', 'foreman', 'region')
+        $hotels = Hotel::with('employees', 'manager', 'foreman', 'region', 'servicePlans')
             ->when($this->region, function ($hotels) {
                 $hotels->whereHas('region', function ($hotels) {
                     $hotels->where('id', $this->region);
