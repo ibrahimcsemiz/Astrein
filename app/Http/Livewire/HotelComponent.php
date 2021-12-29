@@ -11,8 +11,8 @@ class HotelComponent extends Component
     use WithPagination;
 
     public $search = '';
-    public $sortField = 'id';
-    public $sortDirection = 'asc';
+    public $sortField = 'created_at';
+    public $sortDirection = 'desc';
 
     protected $queryString = [
         'search' => ['except' => ''],

@@ -32,20 +32,6 @@
                 <x-table>
                     <x-slot name="thead">
                         <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('id')" :direction="$sortField === 'id' ? $sortDirection : null">
-                                #
-                                @if($sortDirection === 'desc' && $sortField === 'id')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
-                        <x-table-th>
                             <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">
                                 Name
                                 @if($sortDirection === 'desc' && $sortField === 'name')
@@ -97,7 +83,6 @@
                     </x-slot>
                     @forelse($users as $user)
                         <tr>
-                            <x-table-column>{{ $user->id }}</x-table-column>
                             <x-table-column>{{ $user->name }}</x-table-column>
                             <x-table-column>{{ $user->email }}</x-table-column>
                             <x-table-column>{{ $user->contact->telephone ?? '-' }}</x-table-column>
