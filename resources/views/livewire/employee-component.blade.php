@@ -3,7 +3,7 @@
         <div class="w-full p-2">
             <div class="flex w-full items-center">
                 <x-input
-                    wire:model="search"
+                    wire:model.debounce.1500ms="search"
                     id="search"
                     class="block w-full mb-2 mr-2 flex"
                     type="text"

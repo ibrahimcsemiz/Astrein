@@ -14,7 +14,7 @@ class HotelComponent extends Component
     public $sortField = 'id';
     public $sortDirection = 'asc';
 
-    public $queryString = [
+    protected $queryString = [
         'search' => ['except' => ''],
         'page' => ['except' => 1]
     ];

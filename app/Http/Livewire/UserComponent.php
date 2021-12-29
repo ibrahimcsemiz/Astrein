@@ -15,7 +15,7 @@ class UserComponent extends Component
     public $sortField = 'id';
     public $sortDirection = 'asc';
 
-    public $queryString = [
+    protected $queryString = [
         'search' => ['except' => ''],
         'function' => ['except' => ''],
         'page' => ['except' => 1]

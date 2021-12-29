@@ -2,24 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Hotel;
-use App\Models\HotelUser;
 use App\Models\User;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class EmployeeComponent extends Component
 {
-    use WithPagination;
 
     public $hotelId;
 
     public $search = '';
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
 
     public function destroy($id)
     {
