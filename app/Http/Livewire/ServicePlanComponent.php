@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\ServicePlan;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ServicePlanComponent extends Component
 {
+    use WithPagination;
+
     public $hotelId;
     public $name;
     public $servicePlan;
@@ -25,7 +28,7 @@ class ServicePlanComponent extends Component
 
     public function create()
     {
-        $this->servicePlan ?? ServicePlan::make();
+        $this->servicePlan = $this->servicePlan ?? ServicePlan::make();
 
         $this->name = '';
 

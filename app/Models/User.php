@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'function',
+        'status',
         'password',
     ];
 
@@ -50,7 +51,7 @@ class User extends Authenticatable
 
     public function hotel()
     {
-        return $this->belongsToMany(Hotel::class);
+        return $this->belongsToMany(Hotel::class)->withTimestamps();
     }
 
     public function contact()

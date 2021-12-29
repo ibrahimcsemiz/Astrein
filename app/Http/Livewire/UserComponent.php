@@ -42,7 +42,7 @@ class UserComponent extends Component
 
     public function render()
     {
-        $users = User::with('contact', 'personal')
+        $users = User::with('contact', 'personal', 'hotel')
             ->when($this->function, function ($users) {
                 $users->where('function', '=', $this->function);
             })

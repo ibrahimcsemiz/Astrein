@@ -15,9 +15,6 @@
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <style>
-            *{
-                font-family: Arial;
-            }
             tr:nth-child(even) {
                 background-color: #f6f6f6;
             }

@@ -46,48 +46,31 @@
                             </a>
                         </x-table-th>
                         <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Email
-                                @if($sortDirection === 'desc' && $sortField === 'email')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
-                        </x-table-th>
-                        <x-table-th>
                             <a>Telephone</a>
                         </x-table-th>
                         <x-table-th>
-                            <a>City</a>
+                            Hotels
                         </x-table-th>
                         <x-table-th>
-                            <a class="flex underline items-center" style="cursor: pointer;" wire:click="sortBy('function')" :direction="$sortField === 'function' ? $sortDirection : null">
-                                Function
-                                @if($sortDirection === 'desc' && $sortField === 'function')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
-                            </a>
+                            <a>Status</a>
                         </x-table-th>
                         <x-table-th>Manage</x-table-th>
                     </x-slot>
                     @forelse($users as $user)
                         <tr>
                             <x-table-column>{{ $user->name }}</x-table-column>
-                            <x-table-column>{{ $user->email }}</x-table-column>
                             <x-table-column>{{ $user->contact->telephone ?? '-' }}</x-table-column>
-                            <x-table-column>{{ $user->contact->city ?? '-' }}</x-table-column>
-                            <x-table-column>{{ $user->function }}</x-table-column>
+                            <x-table-column>
+                                {{ $user->hotel->pluck('name')->implode(', ') }}
+                            </x-table-column>
+                            <x-table-column>
+                                    <a wire:click="updateStatus" class="text-indigo-700 flex items-center">
+                                        {!! $user->status == 1 ? '<span class="text-green-600">Active</span>' : '<span class="text-red-600">Deactive</span>'; !!}
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                            </x-table-column>
                             <x-table-column>
                                 <a href="{{ route('users.edit', $user->id) }}" class="text-indigo-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

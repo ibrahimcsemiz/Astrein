@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class EmployeeComponent extends Component
 {
-
     public $hotelId;
 
     public $search = '';
@@ -16,37 +15,19 @@ class EmployeeComponent extends Component
         'search' => ['except' => ''],
     ];
 
+    public function store($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->hotel()->syncWithoutDetaching([$this->hotelId]);
+        }
+    }
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         if ($user) {
             $user->hotel()->detach($this->hotelId);
-
-            session()->flash('status', 'success');
-            session()->flash('message', 'The operation was successful.');
-
-        } else {
-            session()->flash('status', 'error');
-            session()->flash('message', 'An error occurred during the operation.');
-        }
-    }
-
-    public function store($id)
-    {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->hotel()->attach($this->hotelId, [
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
-            $user->hotel()->syncWithoutDetaching([$this->hotelId]);
-
-            session()->flash('status', 'success');
-            session()->flash('message', 'The operation was successful.');
-        } else {
-            session()->flash('status', 'error');
-            session()->flash('message', 'An error occurred during the operation.');
         }
     }
 
@@ -69,7 +50,7 @@ class EmployeeComponent extends Component
         }
 
         return view('livewire.employee-component', [
-            'id' => $this->hotelId,
+            'hotelId' => $this->hotelId,
             'employees' => $employees,
             'users' => $users ?? [],
         ]);
