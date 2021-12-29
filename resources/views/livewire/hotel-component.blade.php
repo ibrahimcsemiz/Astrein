@@ -19,7 +19,13 @@
                         id="name"
                         class="block w-full mb-2 mr-2 flex"
                         type="text"
-                        placeholder="Search by name, telephone, email, region, city, foreman or manager" />
+                        placeholder="Search by name, telephone, city, foreman or manager" />
+                    <x-select wire:model.live="region" class="block mb-2 mr-2 flex text-gray-500">
+                        <option value="">Search by region</option>
+                        @foreach($regions as $region)
+                            <option value="{{ $region->id }}">{{ $region->name }}</option>
+                        @endforeach
+                    </x-select>
                 </div>
                 <x-table>
                     <x-slot name="thead">

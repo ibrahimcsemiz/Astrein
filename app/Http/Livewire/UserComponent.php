@@ -42,9 +42,10 @@ class UserComponent extends Component
 
     public function render()
     {
-        $users = User::when($this->function, function ($users) {
-            $users->where('function', '=', $this->function);
-        })
+        $users = User::with('contact', 'personal')
+            ->when($this->function, function ($users) {
+                $users->where('function', '=', $this->function);
+            })
             ->when($this->search, function ($users) {
                 $users->where(function ($users) {
                     $users->where('name', 'like', '%' . $this->search . '%')
@@ -57,8 +58,6 @@ class UserComponent extends Component
                         });
                 });
             })
-            ->with('contact')
-            ->with('personal')
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(25);
 
