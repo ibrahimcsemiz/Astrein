@@ -8,17 +8,12 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
         <!-- Styles -->
         @livewireStyles
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <style>
-            tr:nth-child(even) {
-                background-color: #f6f6f6;
-            }
-        </style>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -40,12 +35,5 @@
                 @livewireScripts
             </main>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.select2picker').select2();
-            });
-        </script>
     </body>
 </html>

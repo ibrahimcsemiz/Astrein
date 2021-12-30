@@ -25,8 +25,8 @@ class StoreHotelRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'email' => 'email|required|unique:hotels',
-            'telephone' => 'string|required|unique:hotels',
+            'email' => 'email|required|unique:hotels,email,' . $this->hotel->id . ',id',
+            'telephone' => 'string|required|unique:hotels,telephone,' . $this->hotel->id . ',id',
             'manager_id' => 'integer|required',
             'foreman_id' => 'integer|required',
             'region_id' => 'integer|required',
