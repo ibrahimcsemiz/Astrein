@@ -32,15 +32,11 @@ class UserController extends Controller
                 'password' => Hash::make($password)
             ]);
 
-            // Creating Contact Information
-
             $insertContactInformation = $insertUser->contact()->create([
                 'telephone' => $request->telephone,
                 'city' => $request->city,
                 'address' => $request->address
             ]);
-
-            // Creating Personal Information
 
             $insertPersonalInformation = $insertUser->personal()->create([
                 'birth_date' => $request->birth_date
@@ -82,15 +78,11 @@ class UserController extends Controller
                 'function' => $request->function
             ]);
 
-            // Updating Contact Information
-
             $updateContactInformation = $user->contact()->update([
                 'telephone' => $request->telephone,
                 'city' => $request->city,
                 'address' => $request->address
             ]);
-
-            // Updating Personal Information
 
             $updatePersonalInformation = $user->personal()->update([
                 'birth_date' => $request->birth_date

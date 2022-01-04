@@ -57,6 +57,7 @@ class UserComponent extends Component
     public function render()
     {
         $users = User::with('contact', 'hotel')
+            ->where('function', '!=', 'Employee')
             ->when($this->function, function ($users) {
                 $users->where('function', '=', $this->function);
             })

@@ -27,7 +27,6 @@
                                     <option value="Office">&middot; Office</option>
                                     <option value="Manager">&middot; Manager</option>
                                     <option value="Foreman">&middot; Foreman</option>
-                                    <option value="Employee">&middot; Employee</option>
                                 </x-select>
                             </div>
                         </div>

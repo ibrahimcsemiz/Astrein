@@ -35,7 +35,6 @@
                                     <option value="Office" {{ $user->function == 'Office' ? 'selected' : '' }}>&middot; Office</option>
                                     <option value="Manager" {{ $user->function == 'Manager' ? 'selected' : '' }}>&middot; Manager</option>
                                     <option value="Foreman" {{ $user->function == 'Foreman' ? 'selected' : '' }}>&middot; Foreman</option>
-                                    <option value="Employee" {{ $user->function == 'Employee' ? 'selected' : '' }}>&middot; Employee</option>
                                 </x-select>
                             </div>
                         </div>

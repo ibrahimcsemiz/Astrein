@@ -25,7 +25,6 @@
                     </x-select>
                     <x-select wire:model.live="function" class="block mb-2 mr-2 flex text-gray-500">
                         <option value="">Search by function</option>
-                        <option value="Employee">&middot; Employee</option>
                         <option value="Foreman">&middot; Foreman</option>
                         <option value="Manager">&middot; Manager</option>
                         <option value="Office">&middot; Office</option>
