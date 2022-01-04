@@ -1,10 +1,8 @@
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Users') }}
-        <span class="float-right">
-            <x-a-button :href="url('users/create')">Add New User</x-a-button>
-        </span>
-    </h2>
+    {{ __('Users') }}
+    <span class="float-right">
+        <x-a-button :href="url('users/create')">Add New User</x-a-button>
+    </span>
 </x-slot>
 
 <div class="py-12">
