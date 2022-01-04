@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Hotel;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateHotelRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,12 @@ class UpdateHotelRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'email' => 'email|required|unique:hotels,email,' . $this->hotel,
-            'telephone' => 'string|required|unique:hotels,telephone,' . $this->hotel,
-            'manager_id' => 'integer|required',
-            'foreman_id' => 'integer|required',
-            'region_id' => 'integer|required',
+            'email' => 'email|required|unique:users,email,' . $this->user->id . ',id',
+            'function' => 'string|required',
+            'telephone' => 'string|required|unique:contact_information,telephone,' . $this->user->id . ',id',
             'city' => 'string|nullable',
-            'address' => 'string|nullable'
+            'address' => 'string|nullable',
+            'birth_date' => 'date|nullable'
         ];
     }
 }
