@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add New User') }}
-            <span class="float-right">
-                <x-a-button :href="url('users')">Users</x-a-button>
-            </span>
-        </h2>
+        {{ __('Add New User') }}
+        <span class="float-right">
+            <x-a-button :href="url('users')">Users</x-a-button>
+        </span>
     </x-slot>
     <div class="py-12">
         <form action="{{ route('users.store') }}" method="post">
@@ -22,7 +20,6 @@
                             <div>
                                 <x-input id="email" class="block mt-1 w-full required:border-red-300" type="email" name="email" :value="old('email')" placeholder="Email" required />
                             </div>
-                            <!-- SELECT USER FUNCTION
                             <div>
                                 <x-select id="function" class="block mt-1 w-full required:border-red-300" name="function" required autofocus>
                                     <option value="">Please select user function</option>
@@ -33,7 +30,6 @@
                                     <option value="Employee">&middot; Employee</option>
                                 </x-select>
                             </div>
-                            -->
                         </div>
                     </div>
                 </div>
