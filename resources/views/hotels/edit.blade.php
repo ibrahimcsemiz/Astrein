@@ -1,18 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Hotel') }}
-            <span class="float-right flex">
-                <form action="{{ route('hotels.destroy', $hotel->id) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <x-button onclick="return confirm('Are you sure?')" class="mt-2 text-red-600">
-                        {{ __('Delete') }}
-                    </x-button>
-                </form>
-                <x-a-button :href="url('hotels')" class="ml-1">Hotels</x-a-button>
-            </span>
-        </h2>
+        {{ __('Edit Hotel') }}
+        <span class="float-right flex">
+            <form action="{{ route('hotels.destroy', $hotel->id) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <x-button onclick="return confirm('Are you sure?')" class="mt-2 text-red-600">
+                    {{ __('Delete') }}
+                </x-button>
+            </form>
+            <x-a-button :href="url('hotels')" class="ml-1">Hotels</x-a-button>
+        </span>
     </x-slot>
     <div class="py-12">
         <form action="{{ route('hotels.update', $hotel->id) }}" method="post">

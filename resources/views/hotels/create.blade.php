@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add New Hotel') }}
-            <span class="float-right">
-                <x-a-button :href="url('hotels')">Hotels</x-a-button>
-            </span>
-        </h2>
+        {{ __('Add New Hotel') }}
+        <span class="float-right">
+            <x-a-button :href="url('hotels')">Hotels</x-a-button>
+        </span>
     </x-slot>
     <div class="py-12">
         <form action="{{ route('hotels.store') }}" method="post">
