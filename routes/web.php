@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\EmployeeComponent;
 use App\Http\Livewire\HotelComponent;
 use App\Http\Livewire\UserComponent;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +28,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('users', UserController::class, ['except' => ['index']]);
+Route::resource('employees', EmployeeController::class, ['except' => ['index']]);
 Route::resource('hotels', HotelController::class, ['except' => ['index']]);
 
 Route::get('/users', UserComponent::class)->name('users')->middleware(['auth']);
-// Route::get('/employees', UserComponent::class)->name('employees')->middleware(['auth']);
+Route::get('/employees', EmployeeComponent::class)->name('employees')->middleware(['auth']);
 Route::get('/hotels', HotelComponent::class)->name('hotels')->middleware(['auth']);
 
 Route::get('/hello', \App\Http\Livewire\HelloWorld::class);
