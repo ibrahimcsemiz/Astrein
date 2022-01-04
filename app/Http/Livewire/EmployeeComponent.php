@@ -2,57 +2,73 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Employee;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EmployeeComponent extends Component
 {
-    public $hotelId;
+    use WithPagination;
 
-    public $search = '';
+    public $search;
+    public $status;
+    public $sortField = 'created_at';
+    public $sortDirection = 'desc';
 
     protected $queryString = [
         'search' => ['except' => ''],
+        'page' => ['except' => 1]
     ];
 
-    public function store($id)
+    public function updatingSearch()
     {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->hotel()->syncWithoutDetaching([$this->hotelId]);
+        $this->resetPage();
+    }
+
+    public function updatingStatus()
+    {
+        $this->resetPage();
+    }
+
+    public function updateStatus($id)
+    {
+        $employee = Employee::findOrFail($id);
+        if ($employee) {
+            $employee->status = $employee->status == 1 ? 0 : 1;
+            $employee->save();
         }
     }
 
-    public function destroy($id)
+    public function sortBy($field)
     {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->hotel()->detach($this->hotelId);
-        }
+        $this->sortDirection = $this->sortField === $field
+            ? $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc'
+            : 'asc';
+
+        $this->sortField = $field;
     }
 
     public function render()
     {
-        $employees = User::with('hotel')
-            ->whereHas('hotel', function ($employees){
-                $employees->where('hotel_id', $this->hotelId);
+        $employees = Employee::with('contact', 'hotel')
+            ->where('function', 'Employee')
+            ->when(is_numeric($this->status), function ($employees) {
+                $employees->where('status', '=', $this->status);
             })
-            ->get();
+            ->when($this->search, function ($employees) {
+                $employees->where(function ($employees) {
+                    $employees->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhereHas('contact', function ($employees) {
+                            $employees->where('telephone', 'like', '%' . $this->search . '%');
+                        })
+                        ->orWhereHas('hotel', function ($employees) {
+                            $employees->where('name', 'like', '%' . $this->search . '%');
+                        });
+                });
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(25);
 
-        $employeeIds = $employees->pluck('id')->toArray();
-
-        if ($this->search && strlen($this->search) >= 3) {
-
-            $users = User::where('function', 'Employee')
-                ->where('name', 'like', '%' . $this->search . '%')
-                ->whereNotIn('id', $employeeIds)
-                ->get();
-        }
-
-        return view('livewire.employee-component', [
-            'hotelId' => $this->hotelId,
-            'employees' => $employees,
-            'users' => $users ?? [],
-        ]);
+        return view('livewire.employee-component', compact('employees'));
     }
 }

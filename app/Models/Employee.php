@@ -26,16 +26,16 @@ class Employee extends Model
 
     public function hotel()
     {
-        return $this->belongsToMany(Hotel::class)->withTimestamps();
+        return $this->belongsToMany(Hotel::class, 'hotel_user', 'user_id', 'hotel_id')->withTimestamps();
     }
 
     public function contact()
     {
-        return $this->hasOne(ContactInformation::class);
+        return $this->hasOne(ContactInformation::class, 'user_id', 'id');
     }
 
     public function personal()
     {
-        return $this->hasOne(PersonalInformation::class);
+        return $this->hasOne(PersonalInformation::class, 'user_id', 'id');
     }
 }
