@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class EmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,9 +25,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'email' => 'email|required|unique:users,email,' . $this->user,
+            'email' => 'email|required|unique:users,email,' . $this->employee->id . ',id',
             'function' => 'string|required',
-            'telephone' => 'string|required|unique:contact_information,telephone,' . $this->user . ',user_id',
+            'telephone' => 'string|required|unique:contact_information,telephone,' . $this->employee->id . ',id',
             'city' => 'string|nullable',
             'address' => 'string|nullable',
             'birth_date' => 'date|nullable'
