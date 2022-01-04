@@ -2,61 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Hotel\StoreHotelRequest;
-use App\Http\Requests\Hotel\UpdateHotelRequest;
+use App\Http\Requests\HotelRequest;
 use App\Models\Hotel;
 use App\Models\Region;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 class HotelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $users = User::whereIn('function', ['Manager', 'Foreman'])
-            ->get();
+        $managers = User::where('function', 'Manager')->get();
+        $foremans = User::where('function', 'Foreman')->get();
 
         $regions = Region::all();
 
-        return view('hotels.create', [
-            'managers' => $users->where('function', 'Manager'),
-            'foremans' => $users->where('function', 'Foreman'),
-            'regions' => $regions,
-        ]);
+        return view('hotels.create', compact('managers', 'foremans', 'regions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreHotelRequest $request)
+    public function store(HotelRequest $request)
     {
         $insertHotel = Hotel::create([
-            'name' => Str::title($request->input('name')),
-            'email' => $request->input('email'),
-            'manager_id' => $request->input('manager_id'),
-            'foreman_id' => $request->input('foreman_id'),
-            'region_id' => $request->input('region_id'),
-            'telephone' => $request->input('telephone'),
-            'city' => $request->input('city'),
-            'address' => $request->input('address')
+            'name' => $request->name,
+            'email' => $request->email,
+            'manager_id' => $request->manager_id,
+            'foreman_id' => $request->foreman_id,
+            'region_id' => $request->region_id,
+            'telephone' => $request->telephone,
+            'city' => $request->city,
+            'address' => $request->address
         ]);
 
         if ($insertHotel) {
@@ -66,72 +45,34 @@ class HotelController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Hotel $hotel)
     {
-        if (!Hotel::exists($id)) {
-            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
-        }
+        $hotel->load(['manager', 'foreman', 'region']);
 
-        return view('hotels.show', [
-            'data' => Hotel::where('id', $id)->with('manager')->with('foreman')->with('region')->get(),
-        ]);
+        return view('hotels.show', compact('hotel'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Hotel $hotel)
     {
-        if (!Hotel::exists($id)) {
-            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
-        }
-
-        $users = User::whereIn('function', ['Manager', 'Foreman'])
-            ->get();
+        $managers = User::where('function', 'Manager')->get();
+        $foremans = User::where('function', 'Foreman')->get();
 
         $regions = Region::all();
 
-        return view('hotels.edit', [
-            'data' => Hotel::where('id', $id)->get(),
-            'managers' => $users->where('function', 'Manager'),
-            'foremans' => $users->where('function', 'Foreman'),
-            'regions' => $regions,
-        ]);
+        return view('hotels.edit', compact('hotel', 'managers', 'foremans', 'regions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateHotelRequest $request, $id)
+    public function update(HotelRequest $request, Hotel $hotel)
     {
-        if (!Hotel::exists($id)) {
-            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
-        }
-
-        $hotel = Hotel::where('id', $id)->first();
-
         $updateHotel = $hotel->update([
-            'name' => Str::title($request->input('name')),
-            'email' => $request->input('email'),
-            'manager_id' => $request->input('manager_id'),
-            'foreman_id' => $request->input('foreman_id'),
-            'region_id' => $request->input('region_id'),
-            'telephone' => $request->input('telephone'),
-            'city' => $request->input('city'),
-            'address' => $request->input('address')
+            'name' => $request->name,
+            'email' => $request->email,
+            'manager_id' => $request->manager_id,
+            'foreman_id' => $request->foreman_id,
+            'region_id' => $request->region_id,
+            'telephone' => $request->telephone,
+            'city' => $request->city,
+            'address' => $request->address
         ]);
 
         if ($updateHotel) {
@@ -141,19 +82,9 @@ class HotelController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Hotel $hotel)
     {
-        if (!Hotel::exists($id)) {
-            return redirect(url('hotels'))->with('status', 'error')->with('message', 'Hotel not found.');
-        }
-
-        $deleteHotel = Hotel::where('id', $id)->delete();
+        $deleteHotel = $hotel->delete();
 
         if ($deleteHotel) {
             return redirect(url('hotels'))->with('status', 'success')->with('message', 'The operation was successful.');
