@@ -1,7 +1,7 @@
 <x-slot name="header">
     {{ __('Employees') }}
     <span class="float-right">
-        <x-a-button :href="url('employees/create')">Add New User</x-a-button>
+        <x-a-button :href="url('employees/create')">Add New Employee</x-a-button>
     </span>
 </x-slot>
 
@@ -58,17 +58,23 @@
                             <x-table-column>
                                 {{ $employee->hotel->pluck('name')->implode(', ') }}
                             </x-table-column>
-                            <x-table-column class="{{ $employee->status == 1 ? 'bg-green-200' : 'bg-red-200' }}">
-                                <a style="cursor:pointer;" wire:click="updateStatus({{ $employee->id }})" class="{{ $employee->status == 1 ? 'text-red-600' : 'text-green-600' }} flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                    </svg>
+                            <x-table-column>
+                                <a style="cursor:pointer;" wire:click="updateStatus({{ $employee->id }})" class="flex items-center">
+                                    @if($employee->status == 1)
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                        </svg>
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                                        </svg>
+                                    @endif
                                 </a>
                             </x-table-column>
                             <x-table-column>
-                                <a href="{{ route('employees.edit', $employee->id) }}" class="text-indigo-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                <a href="{{ route('employees.edit', $employee->id) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                     </svg>
                                 </a>
                             </x-table-column>

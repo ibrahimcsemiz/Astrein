@@ -2,14 +2,14 @@
     <x-slot name="header">
         {{ __('Edit Employee') }}
         <span class="float-right flex">
-            <form action="{{ route('employees.destroy', $user->id) }}" method="post">
+            <form action="{{ route('employees.destroy', $employee->id) }}" method="post">
                 @method('DELETE')
                 @csrf
                 <x-button onclick="return confirm('Are you sure?')" class="mt-2 text-red-600">
                     {{ __('Delete') }}
                 </x-button>
             </form>
-            <x-a-button :href="url('employees')" class="ml-1">Users</x-a-button>
+            <x-a-button :href="url('employees')" class="ml-1">Employees</x-a-button>
         </span>
     </x-slot>
     <div class="py-12">
@@ -28,17 +28,6 @@
                             <div>
                                 <x-input id="email" class="block mt-1 w-full required:border-red-300" type="email" name="email" value="{{ $employee->email }}" placeholder="Email" required />
                             </div>
-                            <!-- SELECT USER FUNCTION
-                            <div>
-                                <x-select id="function" class="block mt-1 w-full required:border-red-300" name="function" required>
-                                    <option value="">Please select user function</option>
-                                    <option value="Admin" {{ $employee->function == 'Admin' ? 'selected' : '' }}>&middot; Admin</option>
-                                    <option value="Office" {{ $employee->function == 'Office' ? 'selected' : '' }}>&middot; Office</option>
-                                    <option value="Manager" {{ $employee->function == 'Manager' ? 'selected' : '' }}>&middot; Manager</option>
-                                    <option value="Foreman" {{ $employee->function == 'Foreman' ? 'selected' : '' }}>&middot; Foreman</option>
-                                    <option value="Employee" {{ $employee->function == 'Employee' ? 'selected' : '' }}>&middot; Employee</option>
-                                </x-select>
-                            </div>-->
                         </div>
                     </div>
                 </div>
