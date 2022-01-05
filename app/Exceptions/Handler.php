@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -37,5 +39,13 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Exception|Throwable $e) {
+        $url = request()->route()->compiled->getStaticPrefix();
+
+        if ($e instanceof ModelNotFoundException) {
+            return redirect($url)->with('status', 'error')->with('message', $e->getMessage());
+        }
     }
 }

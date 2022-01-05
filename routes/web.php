@@ -35,10 +35,6 @@ Route::get('/users', UserComponent::class)->name('users')->middleware(['auth']);
 Route::get('/employees', EmployeeComponent::class)->name('employees')->middleware(['auth']);
 Route::get('/hotels', HotelComponent::class)->name('hotels')->middleware(['auth']);
 
-Route::get('/hello', \App\Http\Livewire\HelloWorld::class);
-
-//Route::resource('hotels', \App\Http\Controllers\HotelController::class);
-
 /*Route::get('/get-cities', function () {
     $source = Http::get('https://en.m.wikipedia.org/wiki/List_of_cities_in_Germany_by_population');
     $dot1 = explode('<table class="wikitable sortable">', $source);
