@@ -27,6 +27,9 @@ class UserRequest extends FormRequest
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $rules['email'] = ',email,' . $this->user->id . ',id';
             $rules['telephone'] = ',telephone,' . $this->user->id . ',id';
+        } else {
+            $rules['email'] = '';
+            $rules['telephone'] = '';
         }
 
         return [
