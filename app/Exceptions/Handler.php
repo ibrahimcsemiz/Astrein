@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
         $url = request()->route()->compiled->getStaticPrefix();
 
         if ($e instanceof ModelNotFoundException) {
-            return redirect($url)->with('status', 'error')->with('message', $e->getMessage());
+            return redirect($url)->with('status', 'error')->with('message', 'Not found');
         }
     }
 }
