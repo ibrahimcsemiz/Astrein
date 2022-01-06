@@ -1,28 +1,33 @@
 <x-slot name="header">
     {{ __('Users') }}
     <span class="float-right">
-        <x-links.button href="{{ route('users.create') }}" button="create">
+        <x-links.button href="{{ route('users.create') }}" do="create">
             {{ __('Add New User') }}
         </x-links.button>
     </span>
 </x-slot>
 
-<div class="py-12">
+<div class="py-6">
     <div class="max-w-full mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <x-crud-alerts class="mb-4" />
                 <div class="lg:flex">
-                    <x-form.inline.input wire:model.live="search" id="name" type="text" placeholder="Search by name or telephone" />
-                    <x-form.inline.select wire:model.live="status">
+                    <div class="w-full mr-1">
+                        <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name or telephone" />
+                    </div>
+                    <div class="w-full mr-1">
+                    <x-form.select wire:model.live="status">
                         <x-slot name="options">
                             <option value="">Search by status</option>
                             <option value="1">Active</option>
                             <option value="0">Banned</option>
                         </x-slot>
-                    </x-form.inline.select>
-                    <x-form.inline.select wire:model.live="function">
+                    </x-form.select>
+                    </div>
+                    <div class="w-full">
+                    <x-form.select wire:model.live="function">
                         <x-slot name="options">
                             <option value="">Search by function</option>
                             <option value="Foreman">&middot; Foreman</option>
@@ -30,7 +35,8 @@
                             <option value="Office">&middot; Office</option>
                             <option value="Admin">&middot; Admin</option>
                         </x-slot>
-                    </x-form.inline.select>
+                    </x-form.select>
+                    </div>
                 </div>
                 <x-table>
                     <x-slot name="thead">

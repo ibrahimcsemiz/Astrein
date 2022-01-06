@@ -23,11 +23,17 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [];
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            $rules['email'] = ',email,' . $this->user->id . ',id';
+            $rules['telephone'] = ',telephone,' . $this->user->id . ',id';
+        }
+
         return [
             'name' => 'string|required',
-            'email' => 'email|required|unique:users,email,' . $this->user->id . ',id',
+            'email' => 'email|required|unique:users' . $rules['email'],
             'function' => 'string|required',
-            'telephone' => 'string|required|unique:contact_information,telephone,' . $this->user->id . ',id',
+            'telephone' => 'string|required|unique:contact_information' . $rules['telephone'],
             'city' => 'string|nullable',
             'address' => 'string|nullable',
             'birth_date' => 'date|nullable'
