@@ -27,13 +27,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('users', UserController::class, ['except' => ['index']]);
-Route::resource('employees', EmployeeController::class, ['except' => ['index']]);
-Route::resource('hotels', HotelController::class, ['except' => ['index']]);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', UserController::class, ['except' => ['index']]);
+    Route::resource('employees', EmployeeController::class, ['except' => ['index']]);
+    Route::resource('hotels', HotelController::class, ['except' => ['index']]);
 
-Route::get('/users', UserComponent::class)->name('users')->middleware(['auth']);
-Route::get('/employees', EmployeeComponent::class)->name('employees')->middleware(['auth']);
-Route::get('/hotels', HotelComponent::class)->name('hotels')->middleware(['auth']);
+    Route::get('/users', UserComponent::class)->name('users');
+    Route::get('/employees', EmployeeComponent::class)->name('employees');
+    Route::get('/hotels', HotelComponent::class)->name('hotels');
+});
 
 /*Route::get('/get-cities', function () {
     $source = Http::get('https://en.m.wikipedia.org/wiki/List_of_cities_in_Germany_by_population');
