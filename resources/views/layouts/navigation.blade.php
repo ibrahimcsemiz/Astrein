@@ -16,10 +16,18 @@
                 </x-slot>
 
                 <x-slot name="links">
-                    <x-navigation.link :href="route('dashboard')" :active="Route::is('dashboard')">{{ __('Dashboard') }}</x-navigation.link>
-                    <x-navigation.link :href="route('users')" :active="Route::is('users')">{{ __('Users') }}</x-navigation.link>
-                    <x-navigation.link :href="route('employees')" :active="Route::is('employees')">{{ __('Employees') }}</x-navigation.link>
-                    <x-navigation.link :href="route('hotels')" :active="Route::is('hotels')">{{ __('Hotels') }}</x-navigation.link>
+                    <x-navigation.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
+                        {{ __('Dashboard') }}
+                    </x-navigation.link>
+                    <x-navigation.link href="{{ route('users') }}" active="{{ request()->routeIs('users') }}">
+                        {{ __('Users') }}
+                    </x-navigation.link>
+                    <x-navigation.link href="{{ route('employees') }}" active="{{ request()->routeIs('employees') }}">
+                        {{ __('Employees') }}
+                    </x-navigation.link>
+                    <x-navigation.link href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels') }}">
+                        {{ __('Hotels') }}
+                    </x-navigation.link>
                 </x-slot>
 
             </x-navigation.menu>
@@ -36,11 +44,15 @@
                     </x-slot>
 
                     <x-slot name="links">
-                        <x-navigation.profile.link :href="route('dashboard')" :active="Route::is('dashboard')">Password</x-navigation.profile.link>
+                        <x-navigation.profile.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
+                            Password
+                        </x-navigation.profile.link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-navigation.profile.link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Log Out') }}</x-navigation.profile.link>
+                            <x-navigation.profile.link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-navigation.profile.link>
                         </form>
                     </x-slot>
 
@@ -53,10 +65,18 @@
     <x-navigation.responsive>
 
         <x-slot name="links">
-            <x-navigation.link class="block text-base" :href="route('dashboard')" :active="Route::is('dashboard')">{{ __('Dashboard') }}</x-navigation.link>
-            <x-navigation.link class="block text-base" :href="route('users')" :active="Route::is('users')">{{ __('Users') }}</x-navigation.link>
-            <x-navigation.link class="block text-base" :href="route('employees')" :active="Route::is('employees')">{{ __('Employees') }}</x-navigation.link>
-            <x-navigation.link class="block text-base" :href="route('hotels')" :active="Route::is('hotels')">{{ __('Hotels') }}</x-navigation.link>
+            <x-navigation.link class="block text-base" href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
+                {{ __('Dashboard') }}
+            </x-navigation.link>
+            <x-navigation.link class="block text-base" href="{{ route('users') }}" active="{{ request()->routeIs('users') }}">
+                {{ __('Users') }}
+            </x-navigation.link>
+            <x-navigation.link class="block text-base" href="{{ route('employees') }}" active="{{ request()->routeIs('employees') }}">
+                {{ __('Employees') }}
+            </x-navigation.link>
+            <x-navigation.link class="block text-base" href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels') }}">
+                {{ __('Hotels') }}
+            </x-navigation.link>
         </x-slot>
 
     </x-navigation.responsive>

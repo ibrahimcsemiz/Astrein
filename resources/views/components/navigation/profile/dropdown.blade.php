@@ -17,7 +17,6 @@
          aria-orientation="vertical"
          aria-labelledby="user-menu-button"
          tabindex="-1">
-        <!-- Active: "bg-gray-100", Not Active: "" -->
         {{ $links }}
     </div>
 </div>
