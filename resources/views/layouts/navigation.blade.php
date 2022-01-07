@@ -19,13 +19,13 @@
                     <x-navigation.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
                         {{ __('Dashboard') }}
                     </x-navigation.link>
-                    <x-navigation.link href="{{ route('users') }}" active="{{ request()->routeIs('users') }}">
+                    <x-navigation.link href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
                         {{ __('Users') }}
                     </x-navigation.link>
-                    <x-navigation.link href="{{ route('employees') }}" active="{{ request()->routeIs('employees') }}">
+                    <x-navigation.link href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
                         {{ __('Employees') }}
                     </x-navigation.link>
-                    <x-navigation.link href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels') }}">
+                    <x-navigation.link href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
                         {{ __('Hotels') }}
                     </x-navigation.link>
                 </x-slot>
@@ -68,13 +68,13 @@
             <x-navigation.link class="block text-base" href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
                 {{ __('Dashboard') }}
             </x-navigation.link>
-            <x-navigation.link class="block text-base" href="{{ route('users') }}" active="{{ request()->routeIs('users') }}">
+            <x-navigation.link class="block text-base" href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
                 {{ __('Users') }}
             </x-navigation.link>
-            <x-navigation.link class="block text-base" href="{{ route('employees') }}" active="{{ request()->routeIs('employees') }}">
+            <x-navigation.link class="block text-base" href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
                 {{ __('Employees') }}
             </x-navigation.link>
-            <x-navigation.link class="block text-base" href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels') }}">
+            <x-navigation.link class="block text-base" href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
                 {{ __('Hotels') }}
             </x-navigation.link>
         </x-slot>
