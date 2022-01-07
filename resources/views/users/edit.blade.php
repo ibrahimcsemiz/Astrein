@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Add New User') }}
+        {{ __('Edit User') }}
         <span class="float-right">
             <x-links.button href="{{ route('users') }}" do="list">Users</x-links.button>
         </span>
@@ -70,7 +70,7 @@
                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <x-form.button onclick="return confirm('Are you sure?')" color="red" class="mt-1">
+                            <x-form.button onclick="return confirm('Are you sure?')" color="red" class="mt-2">
                                 {{ __('Delete') }}
                             </x-form.button>
                         </form>
