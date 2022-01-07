@@ -20,15 +20,15 @@
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Name') }}</x-form.label>
-                                            <x-form.input id="name" type="text" name="name" value="{{ $user->name }}" />
+                                            <x-form.input id="name" type="text" name="name" value="{{ $user->name }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label>{{ __('Email') }}</x-form.label>
-                                            <x-form.input id="email" type="email" name="email" value="{{ $user->email }}"  />
+                                            <x-form.label required>{{ __('Email') }}</x-form.label>
+                                            <x-form.input id="email" type="email" name="email" value="{{ $user->email }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label>{{ __('Function') }}</x-form.label>
-                                            <x-form.select id="function" name="function">
+                                            <x-form.label required>{{ __('Function') }}</x-form.label>
+                                            <x-form.select id="function" name="function" required>
                                                 <x-slot name="options">
                                                     <option value="">Please select user function</option>
                                                     <option value="Admin"{{ $user->function == 'Admin' ? ' selected' : '' }}>Admin</option>
@@ -40,8 +40,8 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                            <x-form.label>{{ __('Telephone') }}</x-form.label>
-                                            <x-form.input id="telephone" type="text" name="telephone" value="{{ $user->contact->telephone }}"  />
+                                            <x-form.label required>{{ __('Telephone') }}</x-form.label>
+                                            <x-form.input id="telephone" type="text" name="telephone" value="{{ $user->contact->telephone }}" required />
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2">

@@ -30,10 +30,10 @@
                     <x-form.select wire:model.live="function">
                         <x-slot name="options">
                             <option value="">Search by function</option>
-                            <option value="Foreman">&middot; Foreman</option>
-                            <option value="Manager">&middot; Manager</option>
-                            <option value="Office">&middot; Office</option>
-                            <option value="Admin">&middot; Admin</option>
+                            <option value="Foreman">Foreman</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Office">Office</option>
+                            <option value="Admin">Admin</option>
                         </x-slot>
                     </x-form.select>
                     </div>
