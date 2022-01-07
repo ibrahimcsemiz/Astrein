@@ -18,11 +18,11 @@
                             <div class="shadow overflow-hidden sm:rounded-md">
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-2">
+                                        <div class="col-span-6 sm:col-span-3">
                                             <x-form.label required>{{ __('Name') }}</x-form.label>
                                             <x-form.input id="name" type="text" name="name" value="{{ $employee->name }}" required />
                                         </div>
-                                        <div class="col-span-6 sm:col-span-2">
+                                        <div class="col-span-6 sm:col-span-3">
                                             <x-form.label required>{{ __('Email') }}</x-form.label>
                                             <x-form.input id="email" type="email" name="email" value="{{ $employee->email }}" required />
                                         </div>
