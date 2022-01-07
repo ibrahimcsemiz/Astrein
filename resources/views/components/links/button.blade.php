@@ -22,7 +22,7 @@
 <span>
     <a {{ $attributes->merge(['class' => $classes]) }}>
         {!! $icon ?? '' !!}
-        <span class="hidden sm:block md:block lg:block text">{{ $slot }}</span>
+        <span class="hidden sm:block md:block lg:block text">{{ $slot ?? '' }}</span>
     </a>
 </span>
 

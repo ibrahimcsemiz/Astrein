@@ -1,41 +1,40 @@
 <x-app-layout>
     <x-slot name="header">
         {{ __($hotel->name) }}
-        <span class="float-right flex">
-            <x-a-button :href="url('hotels')" class="ml-1">Hotels</x-a-button>
+        <span class="float-right">
+            <x-links.button href="{{ route('hotels') }}" do="list">Hotels</x-links.button>
         </span>
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-2">
+    <div class="py-6">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200" style="overflow-x: auto; width: 100%;">
-                    <table style="text-align: left;">
-                        <tr>
-                            <th style="padding: 10px;">Phone</th>
-                            <td>:</td>
-                            <td style="padding: 10px;">{{ $hotel->telephone }}</td>
-                            <th style="padding: 10px;">Manager</th>
-                            <td>:</td>
-                            <td style="padding: 10px;">{{ $hotel->manager->name }}</td>
-                        </tr>
-                        <tr>
-                            <th style="padding: 10px;">Email</th>
-                            <td>:</td>
-                            <td style="padding: 10px;">{{ $hotel->email }}</td>
-                            <th style="padding: 10px;">Foreman</th>
-                            <td>:</td>
-                            <td style="padding: 10px;">{{ $hotel->foreman->name }}</td>
-                        </tr>
-                        <tr>
-                            <th style="padding: 10px;">Address</th>
-                            <td>:</td>
-                            <td style="padding: 10px;">{{ $hotel->address }}</td>
-                        </tr>
-                    </table>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="mt-5 md:mt-0 md:col-span-2">
+                        <x-table hv="vertical">
+                            <x-slot name="rows">
+                                <tr>
+                                    <x-table.th class="bg-gray-50">Telephone</x-table.th>
+                                    <x-table.td border="border-b">{{ $hotel->telephone }}</x-table.td>
+                                    <x-table.th class="bg-gray-50">Manager</x-table.th>
+                                    <x-table.td border="border-b">{{ $hotel->manager->name }}</x-table.td>
+                                </tr>
+                                <tr>
+                                    <x-table.th class="bg-gray-50">Email</x-table.th>
+                                    <x-table.td border="border-b">{{ $hotel->email }}</x-table.td>
+                                    <x-table.th class="bg-gray-50">Foreman</x-table.th>
+                                    <x-table.td border="border-b">{{ $hotel->foreman->name }}</x-table.td>
+                                </tr>
+                                <tr>
+                                    <x-table.th class="bg-gray-50">Address</x-table.th>
+                                    <x-table.td border="border-b">{{ $hotel->address }}</x-table.td>
+                                </tr>
+                            </x-slot>
+                        </x-table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8 mt-1 flex">
             <livewire:workers-component :hotelId="$hotel->id" />
             <livewire:service-plan-component :hotelId="$hotel->id" />
         </div>

@@ -1,7 +1,7 @@
 <x-slot name="header">
     {{ __('Hotels') }}
     <span class="float-right">
-        <x-links.button href="{{ route('hotels.create') }}" button="create">
+        <x-links.button href="{{ route('hotels.create') }}" do="create">
             {{ __('Add New Hotel') }}
         </x-links.button>
     </span>
@@ -14,15 +14,15 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <x-crud-alerts class="mb-4" />
                 <div class="lg:flex">
-                    <x-form.inline.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone, city, foreman or manager" />
-                    <x-form.inline.select wire:model.live="region">
+                    <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone, city, foreman or manager" />
+                    <x-form.select wire:model.live="region">
                         <x-slot name="options">
                             <option value="">Search by region</option>
                             @foreach($regions as $region)
                                 <option value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
                         </x-slot>
-                    </x-form.inline.select>
+                    </x-form.select>
                 </div>
                 <x-table>
                     <x-slot name="thead">
