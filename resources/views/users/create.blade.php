@@ -2,7 +2,7 @@
     <x-slot name="header">
         {{ __('Add New User') }}
         <span class="float-right">
-
+            <x-links.button href="{{ route('users') }}" do="list">Users</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">
