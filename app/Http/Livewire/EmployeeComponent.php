@@ -14,6 +14,8 @@ class EmployeeComponent extends Component
     public $status;
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $limit = 10;
+    public $pageLength = [10, 25, 100];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -37,6 +39,11 @@ class EmployeeComponent extends Component
             $employee->status = $employee->status == 1 ? 0 : 1;
             $employee->save();
         }
+    }
+
+    public function updatingLimit()
+    {
+        $this->resetPage();
     }
 
     public function sortBy($field)
@@ -67,7 +74,11 @@ class EmployeeComponent extends Component
                 });
             })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(25);
+            ->get();
+
+        $employees = in_array($this->limit, $this->pageLength)
+            ? $employees->paginate($this->limit)
+            : $employees->paginate($employees->count());
 
         return view('livewire.employee-component', compact('employees'));
     }
