@@ -15,6 +15,8 @@ class HotelComponent extends Component
     public $region = '';
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $limit = 10;
+    public $pageLength = [10, 25, 100];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -28,6 +30,11 @@ class HotelComponent extends Component
     }
 
     public function updatingRegion()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingLimit()
     {
         $this->resetPage();
     }
@@ -63,11 +70,14 @@ class HotelComponent extends Component
                 });
             })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(25);
+            ->get();
 
-        return view('livewire.hotel-component', [
-            'hotels' => $hotels,
-            'regions' => Region::all(),
-        ]);
+        $hotels = in_array($this->limit, $this->pageLength)
+            ? $hotels->paginate($this->limit)
+            : $hotels->paginate($hotels->count());
+
+        $regions = Region::all();
+
+        return view('livewire.hotel-component', compact('hotels', 'regions'));
     }
 }

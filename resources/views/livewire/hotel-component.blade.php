@@ -14,15 +14,29 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <x-crud-alerts class="mb-4" />
                 <div class="lg:flex">
-                    <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone, city, foreman or manager" />
-                    <x-form.select wire:model.live="region">
-                        <x-slot name="options">
-                            <option value="">Search by region</option>
-                            @foreach($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->name }}</option>
-                            @endforeach
-                        </x-slot>
-                    </x-form.select>
+                    <div class="w-full mr-1">
+                        <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone, city, foreman or manager" />
+                    </div>
+                    <div class="w-full mr-1">
+                        <x-form.select wire:model.live="region">
+                            <x-slot name="options">
+                                <option value="">Search by region</option>
+                                @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                @endforeach
+                            </x-slot>
+                        </x-form.select>
+                    </div>
+                    <div class="w-full">
+                        <x-form.select wire:model.live="limit">
+                            <x-slot name="options">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="100">100</option>
+                                <option value="0">{{ __('All') }}</option>
+                            </x-slot>
+                        </x-form.select>
+                    </div>
                 </div>
                 <x-table>
                     <x-slot name="thead">
