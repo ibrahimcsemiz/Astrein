@@ -18,24 +18,34 @@
                         <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name or telephone" />
                     </div>
                     <div class="w-full mr-1">
-                    <x-form.select wire:model.live="status">
-                        <x-slot name="options">
-                            <option value="">Search by status</option>
-                            <option value="1">Active</option>
-                            <option value="0">Banned</option>
-                        </x-slot>
-                    </x-form.select>
+                        <x-form.select wire:model.live="status">
+                            <x-slot name="options">
+                                <option value="">Search by status</option>
+                                <option value="1">Active</option>
+                                <option value="0">Banned</option>
+                            </x-slot>
+                        </x-form.select>
+                    </div>
+                    <div class="w-full mr-1">
+                        <x-form.select wire:model.live="function">
+                            <x-slot name="options">
+                                <option value="">Search by function</option>
+                                <option value="Foreman">Foreman</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Office">Office</option>
+                                <option value="Admin">Admin</option>
+                            </x-slot>
+                        </x-form.select>
                     </div>
                     <div class="w-full">
-                    <x-form.select wire:model.live="function">
-                        <x-slot name="options">
-                            <option value="">Search by function</option>
-                            <option value="Foreman">Foreman</option>
-                            <option value="Manager">Manager</option>
-                            <option value="Office">Office</option>
-                            <option value="Admin">Admin</option>
-                        </x-slot>
-                    </x-form.select>
+                        <x-form.select wire:model.live="limit">
+                            <x-slot name="options">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="100">100</option>
+                                <option value="0">{{ __('All') }}</option>
+                            </x-slot>
+                        </x-form.select>
                     </div>
                 </div>
                 <x-table>

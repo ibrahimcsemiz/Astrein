@@ -15,6 +15,8 @@ class UserComponent extends Component
     public $status;
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $limit = 10;
+    public $pageLength = [10, 25, 100];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -32,6 +34,11 @@ class UserComponent extends Component
     }
 
     public function updatingStatus()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingLimit()
     {
         $this->resetPage();
     }
@@ -76,7 +83,11 @@ class UserComponent extends Component
                 });
             })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(25);
+            ->get();
+
+        $users = in_array($this->limit, $this->pageLength)
+            ? $users->paginate($this->limit)
+            : $users->paginate($users->count());
 
         return view('livewire.user-component', [
             'users' => $users,
