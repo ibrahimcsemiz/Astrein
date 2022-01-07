@@ -60,7 +60,9 @@
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                    <x-form.button type="submit" color="green">{{ __('Save') }}</x-form.button>
+                                    <x-form.button type="submit" color="green">
+                                        {{ __('Save') }}
+                                    </x-form.button>
                                 </div>
                             </div>
                         </form>

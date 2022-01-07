@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -23,23 +24,40 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
-            $rules['email'] = ',email,' . $this->user->id . ',id';
-            $rules['telephone'] = ',telephone,' . $this->user->id . ',id';
-        } else {
-            $rules['email'] = '';
-            $rules['telephone'] = '';
-        }
+        $user = $this->route()->parameter('user');
+        $id = $user ? $user->id : $user;
 
         return [
-            'name' => 'string|required',
-            'email' => 'email|required|unique:users' . $rules['email'],
-            'function' => 'string|required',
-            'telephone' => 'string|required|unique:contact_information' . $rules['telephone'],
-            'city' => 'string|nullable',
-            'address' => 'string|nullable',
-            'birth_date' => 'date|nullable'
+            'name' => [
+                'required',
+                'string'
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($id)
+            ],
+            'function' => [
+                'required',
+                'string'
+            ],
+            'telephone' => [
+                'required',
+                'string',
+                Rule::unique('contact_information', 'telephone')->ignore($id)
+            ],
+            'city' => [
+                'nullable',
+                'string'
+            ],
+            'address' => [
+                'nullable',
+                'string'
+            ],
+            'birth_date' => [
+                'nullable',
+                'date'
+            ],
         ];
     }
 }

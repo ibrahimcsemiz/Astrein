@@ -50,9 +50,9 @@ class UserController extends Controller
         });
 
         if ($response) {
-            return redirect()->route('users.create')->with('status', 'success')->with('message', 'The operation was successful. <br><b>Password:</b> ' . $password);
+            return redirect()->back()->with('status', 'success')->with('message', 'The operation was successful. <br><b>Password:</b> ' . $password);
         } else {
-            return redirect()->route('users.create')->with('status', 'error')->with('message', 'An error occurred during the operation.');
+            return redirect()->back()->with('status', 'error')->with('message', 'An error occurred during the operation.');
         }
     }
 
