@@ -1,7 +1,7 @@
 <x-slot name="header">
-    {{ __('Employees') }}
+    {{ __('Users') }}
     <span class="float-right">
-        <x-links.button href="{{ route('employees.create') }}" button="create">
+        <x-links.button href="{{ route('employees.create') }}" do="create">
             {{ __('Add New Employee') }}
         </x-links.button>
     </span>
@@ -14,14 +14,14 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <x-crud-alerts class="mb-4" />
                 <div class="lg:flex">
-                    <x-form.inline.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone or hotels" />
-                    <x-form.inline.select wire:model.live="status">
+                    <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone or hotels" />
+                    <x-form.select wire:model.live="status">
                         <x-slot name="options">
                             <option value="">Search by status</option>
                             <option value="1">Active</option>
                             <option value="0">Banned</option>
                         </x-slot>
-                    </x-form.inline.select>
+                    </x-form.select>
                 </div>
                 <x-table>
                     <x-slot name="thead">
@@ -59,13 +59,17 @@
                             <x-table.td>
                                 <a style="cursor:pointer;" wire:click="updateStatus({{ $employee->id }})" class="flex items-center">
                                     @if($employee->status == 1)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                        </svg>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
                                     @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                                        </svg>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
                                     @endif
                                 </a>
                             </x-table.td>
