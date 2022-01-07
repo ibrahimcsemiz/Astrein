@@ -89,8 +89,6 @@ class UserComponent extends Component
             ? $users->paginate($this->limit)
             : $users->paginate($users->count());
 
-        return view('livewire.user-component', [
-            'users' => $users,
-        ]);
+        return view('livewire.user-component', compact('users'));
     }
 }
