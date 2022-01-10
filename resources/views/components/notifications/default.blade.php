@@ -48,7 +48,7 @@
                             <p class="@if($notify['type'] === 'success') {{ 'text-green-500' }} @endif
                             @if($notify['type'] === 'error') {{ 'text-red-500' }} @endif
                             @if($notify['type'] === 'info') {{ 'text-blue-500' }} @endif
-                            @if($notify['type'] === 'warning') {{ 'text-orange-500' }} @endif text-sm leading-5 font-medium">{{ $notify['message'] }}</p>
+                            @if($notify['type'] === 'warning') {{ 'text-orange-500' }} @endif text-sm leading-5 font-medium">{!! $notify['message'] !!}</p>
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button @click="show = false" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
