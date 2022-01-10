@@ -30,10 +30,9 @@
                                             <x-form.select id="function" name="function" required>
                                                 <x-slot name="options">
                                                     <option value="">Please select user function</option>
-                                                    <option value="Admin"{{ old('function') == 'Admin' ? ' selected' : '' }}>Admin</option>
-                                                    <option value="Office"{{ old('function') == 'Office' ? ' selected' : '' }}>Office</option>
-                                                    <option value="Manager"{{ old('function') == 'Manager' ? ' selected' : '' }}>Manager</option>
-                                                    <option value="Foreman"{{ old('function') == 'Foreman' ? ' selected' : '' }}>Foreman</option>
+                                                    @foreach(App\Models\User::FUNCTIONS as $function)
+                                                        <option value="{{ $function }}"{{ old('function') == $function ? ' selected' : '' }}>{{ $function }}</option>
+                                                    @endforeach
                                                 </x-slot>
                                             </x-form.select>
                                         </div>

@@ -12,6 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const FUNCTIONS = [
+        'Foreman',
+        'Manager',
+        'Office',
+        'Admin',
+    ];
+
     protected $fillable = [
         'name',
         'email',
