@@ -50,9 +50,9 @@ class EmployeeController extends Controller
         });
 
         if ($response) {
-            return redirect()->back()->with('status', 'success')->with('message', 'The operation was successful. <br><b>Password:</b> ' . $password);
+            return redirect()->back()->notify('success', 'Success', 'The operation was successful. <br><b>Password:</b> ' . $password);
         } else {
-            return redirect()->back()->with('status', 'error')->with('message', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 
@@ -96,9 +96,9 @@ class EmployeeController extends Controller
         });
 
         if ($response) {
-            return redirect()->back()->with('status', 'success')->with('message', 'The operation was successful.');
+            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
         } else {
-            return redirect()->back()->with('status', 'error')->with('message', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 
@@ -108,9 +108,9 @@ class EmployeeController extends Controller
         $deleteUser = $employee->delete();
 
         if ($deleteUser) {
-            return redirect(url('employees'))->with('status', 'success')->with('message', 'The operation was successful.');
+            return redirect()->route('employees')->notify('success', 'Success', 'The operation was successful.');
         } else {
-            return redirect()->back()->with('status', 'error')->with('message', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 }

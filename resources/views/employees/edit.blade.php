@@ -10,8 +10,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                        <x-crud-alerts class="mb-4" />
+                        <x-notifications.validation />
+                        <x-notifications.default />
                         <form action="{{ route('employees.update', $employee->id) }}" method="post">
                             @method('PUT')
                             @csrf
