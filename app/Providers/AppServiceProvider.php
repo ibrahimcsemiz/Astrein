@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Component;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,5 +49,30 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
         });
+
+        Component::macro('notify', function ($type, $title, $message) {
+            $this->dispatchBrowserEvent('notify', [
+                'type' => $type,
+                'title' => $title,
+                'message' => $message,
+            ]);
+        });
+
+        RedirectResponse::macro('notify', function ($type, $title, $message) {
+            return $this->with('notify', [
+                'type' => $type,
+                'title' => $title,
+                'message' => $message,
+            ]);
+        });
+
+        /*view()->composer('components.notification', function($view) {
+            $view->with('count', User::count());
+        });*/
+
+        /*view()->composer('components.notification', function ($view) {
+            $messages = self::messages();
+            return $view->with('messages', $messages);
+        });*/
     }
 }
