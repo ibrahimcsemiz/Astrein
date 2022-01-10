@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -23,14 +24,40 @@ class EmployeeRequest extends FormRequest
      */
     public function rules()
     {
+        $employee = $this->route()->parameter('employee');
+        $id = $employee ? $employee->id : $employee;
+
         return [
-            'name' => 'string|required',
-            'email' => 'email|required|unique:users,email,' . $this->employee->id . ',id',
-            'function' => 'string|required',
-            'telephone' => 'string|required|unique:contact_information,telephone,' . $this->employee->id . ',id',
-            'city' => 'string|nullable',
-            'address' => 'string|nullable',
-            'birth_date' => 'date|nullable'
+            'name' => [
+                'required',
+                'string'
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($id)
+            ],
+            'function' => [
+                'required',
+                'string'
+            ],
+            'telephone' => [
+                'required',
+                'string',
+                Rule::unique('contact_information', 'telephone')->ignore($id)
+            ],
+            'city' => [
+                'nullable',
+                'string'
+            ],
+            'address' => [
+                'nullable',
+                'string'
+            ],
+            'birth_date' => [
+                'nullable',
+                'date'
+            ],
         ];
     }
 }
