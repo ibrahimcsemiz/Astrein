@@ -11,23 +11,31 @@ class WorkersComponent extends Component
 
     public $search = '';
 
+    public User $user;
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
 
-    public function store($id)
+    public function store(User $user)
     {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->hotel()->syncWithoutDetaching([$this->hotelId]);
+        $attach = $user->hotel()->syncWithoutDetaching([$this->hotelId]);
+
+        if ($attach) {
+            $this->notify('success', 'Success', 'The operation was successful.');
+        } else {
+            $this->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->hotel()->detach($this->hotelId);
+        $detach = $user->hotel()->detach($this->hotelId);
+
+        if ($detach) {
+            $this->notify('success', 'Success', 'The operation was successful.');
+        } else {
+            $this->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 
@@ -47,12 +55,10 @@ class WorkersComponent extends Component
                 ->where('name', 'like', '%' . $this->search . '%')
                 ->whereNotIn('id', $employeeIds)
                 ->get();
+        } else {
+            $users = [];
         }
 
-        return view('livewire.workers-component', [
-            'hotelId' => $this->hotelId,
-            'employees' => $employees,
-            'users' => $users ?? [],
-        ]);
+        return view('livewire.workers-component', compact($this->hotelId, 'employees', 'users'));
     }
 }
