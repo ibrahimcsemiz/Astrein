@@ -12,23 +12,27 @@
                     <div class="mt-5 md:mt-0 md:col-span-2">
                         <x-notifications.validation />
                         <x-notifications.default />
-                        <form action="{{ route('hotels.update', $hotel->id) }}" method="post">
+                        <form action="{{ route('hotels.update', $hotel->id) }}" method="post" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
                             <div class="shadow overflow-hidden sm:rounded-md">
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
+                                        <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Name') }}</x-form.label>
                                             <x-form.input id="name" type="text" name="name" value="{{ $hotel->name }}" required />
                                         </div>
-                                        <div class="col-span-6 sm:col-span-3">
+                                        <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Email') }}</x-form.label>
                                             <x-form.input id="email" type="email" name="email" value="{{ $hotel->email }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
+                                            <x-form.label>{{ __('Image') }}</x-form.label>
+                                            <x-form.input id="image" type="file" name="image" />
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Manager') }}</x-form.label>
-                                            <x-form.select id="manager_id" name="manager_id" data-placeholder="Select a manager" data-allow-clear="false" title="Select a manager" required>
+                                            <x-form.select id="manager_id" name="manager_id" required>
                                                 <x-slot name="options">
                                                     <option value=""></option>
                                                     @foreach($managers as $manager)
@@ -40,7 +44,7 @@
 
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Foreman') }}</x-form.label>
-                                            <x-form.select id="foreman_id" name="foreman_id" data-placeholder="Select a foreman" data-allow-clear="false" title="Select a foreman" required>
+                                            <x-form.select id="foreman_id" name="foreman_id" required>
                                                 <x-slot name="options">
                                                     <option value=""></option>
                                                     @foreach($foremans as $foreman)
@@ -52,7 +56,7 @@
 
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Region') }}</x-form.label>
-                                            <x-form.select id="region_id" name="region_id" data-placeholder="Select a region" data-allow-clear="false" title="Select a region" required>
+                                            <x-form.select id="region_id" name="region_id" required>
                                                 <x-slot name="options">
                                                     <option value=""></option>
                                                     @foreach($regions as $region)

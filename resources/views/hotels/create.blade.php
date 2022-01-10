@@ -12,18 +12,22 @@
                     <div class="mt-5 md:mt-0 md:col-span-2">
                         <x-notifications.validation />
                         <x-notifications.default />
-                        <form action="{{ route('hotels.store') }}" method="post">
+                        <form action="{{ route('hotels.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="shadow overflow-hidden sm:rounded-md">
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
+                                        <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Name') }}</x-form.label>
                                             <x-form.input id="name" type="text" name="name" value="{{ old('name') }}" required />
                                         </div>
-                                        <div class="col-span-6 sm:col-span-3">
+                                        <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Email') }}</x-form.label>
                                             <x-form.input id="email" type="email" name="email" value="{{ old('email') }}" required />
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-2">
+                                            <x-form.label>{{ __('Image') }}</x-form.label>
+                                            <x-form.input id="image" type="file" name="image" />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('Manager') }}</x-form.label>
