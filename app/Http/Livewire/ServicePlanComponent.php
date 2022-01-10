@@ -13,22 +13,40 @@ class ServicePlanComponent extends Component
 
     public $hotelId;
     public $name;
-    public $servicePlan;
     public $model;
+
+    public ServicePlan $servicePlan;
 
     public $showEditModal = false;
 
-    public function destroy($id)
+    public function rules()
     {
-        $this->servicePlan = ServicePlan::findOrFail($id);
-        if ($this->servicePlan) {
-            $this->servicePlan->delete();
+        return [
+            'name' => [
+                'required',
+                Rule::unique('service_plans', 'name')->where(function ($query) {
+                    return $query->where('hotel_id', $this->hotelId)
+                        ->where('id', '!=', $this->servicePlan->id);
+                })
+            ]
+        ];
+    }
+
+
+    public function destroy(ServicePlan $servicePlan)
+    {
+        $delete = $servicePlan->delete();
+
+        if ($delete) {
+            $this->notify('success', 'Success', 'The operation was successful.');
+        } else {
+            $this->notify('error', 'Error', 'An error occurred during the operation.');
         }
     }
 
-    public function create()
+    public function create(ServicePlan $servicePlan)
     {
-        $this->servicePlan = $this->servicePlan ?? ServicePlan::make();
+        $this->servicePlan = $this->servicePlan ?? $servicePlan::make();
 
         $this->name = '';
 
@@ -39,50 +57,46 @@ class ServicePlanComponent extends Component
 
     public function store()
     {
-        $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('service_plans', 'name')->where(function ($query) {
-                    return $query->where('hotel_id', $this->hotelId);
-                })
-            ]
-        ]);
+        $this->validate();
 
-        $this->servicePlan->create([
+        $insert = $this->servicePlan->create([
             'name' => $this->name,
             'hotel_id' => $this->hotelId
         ]);
 
+        if ($insert) {
+            $this->notify('success', 'Success', 'The operation was successful.');
+        } else {
+            $this->notify('error', 'Error', 'An error occurred during the operation.');
+        }
+
         $this->showEditModal = false;
     }
 
-    public function edit($id)
+    public function edit(ServicePlan $servicePlan)
     {
         $this->model = 'save';
-        $this->servicePlan = ServicePlan::findOrFail($id);
 
-        if ($this->servicePlan) {
-            $this->name = $this->servicePlan->name;
+        $this->servicePlan = $servicePlan;
 
-            $this->showEditModal = true;
-        }
+        $this->name = $servicePlan->name;
+
+        $this->showEditModal = true;
     }
 
     public function save()
     {
-        $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('service_plans', 'name')->where(function ($query) {
-                    return $query->where('hotel_id', $this->hotelId)
-                        ->where('id', '!=', $this->servicePlan->id);
-                })
-            ]
-        ]);
+        $this->validate();
 
-        $this->servicePlan->update([
+        $update = $this->servicePlan->update([
             'name' => $this->name
         ]);
+
+        if ($update) {
+            $this->notify('success', 'Success', 'The operation was successful.');
+        } else {
+            $this->notify('error', 'Error', 'An error occurred during the operation.');
+        }
 
         $this->showEditModal = false;
     }
@@ -91,8 +105,6 @@ class ServicePlanComponent extends Component
     {
         $servicePlans = ServicePlan::where('hotel_id', $this->hotelId)->get();
 
-        return view('livewire.service-plan-component', [
-            'servicePlans' => $servicePlans
-        ]);
+        return view('livewire.service-plan-component', compact('servicePlans'));
     }
 }
