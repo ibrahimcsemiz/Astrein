@@ -19,11 +19,6 @@ class Employee extends Model
         'password',
     ];
 
-    public static function exists($id)
-    {
-        return self::where('id', $id)->count() > 0;
-    }
-
     public function hotel()
     {
         return $this->belongsToMany(Hotel::class, 'hotel_user', 'user_id', 'hotel_id')->withTimestamps();

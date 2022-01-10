@@ -15,15 +15,4 @@ class HotelUser extends Model
         'user_id',
         'hotel_id',
     ];
-
-    public static function exists($user, $hotel, $type = '')
-    {
-        if ($type == ''){
-            return self::where('user_id', $user)->where('hotel_id', $hotel)->count() > 0;
-        } elseif ($type == 'idle') {
-            return self::where('user_id', $user)->where('hotel_id', $hotel)->count() == 0;
-        }
-
-        return false;
-    }
 }

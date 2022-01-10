@@ -21,11 +21,6 @@ class Hotel extends Model
         'image',
     ];
 
-    public static function exists($id)
-    {
-        return self::findOrFail($id);
-    }
-
     public function servicePlans()
     {
         return $this->hasMany(ServicePlan::class);
