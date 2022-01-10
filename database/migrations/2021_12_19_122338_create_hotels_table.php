@@ -23,6 +23,7 @@ class CreateHotelsTable extends Migration
             $table->string('address', 1000)->nullable();
             $table->foreignId('foreman_id')->constrained('users', 'id');
             $table->foreignId('manager_id')->constrained('users', 'id');
+            $table->string('image', 255)->nullable();
             $table->timestamps();
         });
     }
