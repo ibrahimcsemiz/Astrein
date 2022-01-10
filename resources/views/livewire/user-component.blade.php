@@ -11,8 +11,8 @@
     <div class="max-w-full mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                <x-crud-alerts class="mb-4" />
+                <x-notifications.validation />
+                <x-notifications.default />
                 <div class="lg:flex">
                     <div class="w-full mr-1">
                         <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name or telephone" />

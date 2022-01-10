@@ -1,5 +1,4 @@
 <div class="w-full flex">
-    <x-notifications.livewire />
     <div class="w-1/2 mr-1">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
@@ -74,4 +73,5 @@
             </div>
         </div>
     </div>
+    <x-notifications.livewire />
 </div>
