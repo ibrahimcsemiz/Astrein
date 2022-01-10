@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ImageHelper;
 use App\Http\Requests\HotelRequest;
 use App\Models\Hotel;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Nette\Utils\Image;
 
 class HotelController extends Controller
 {
@@ -27,6 +30,10 @@ class HotelController extends Controller
 
     public function store(HotelRequest $request)
     {
+        $filename = Str::slug($request->name, '-');
+
+        $image = ImageHelper::singleUpload($filename, 'images', $request->image);
+
         $insertHotel = Hotel::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -35,7 +42,8 @@ class HotelController extends Controller
             'region_id' => $request->region_id,
             'telephone' => $request->telephone,
             'city' => $request->city,
-            'address' => $request->address
+            'address' => $request->address,
+            'image' => $image,
         ]);
 
         if ($insertHotel) {
@@ -64,6 +72,17 @@ class HotelController extends Controller
 
     public function update(HotelRequest $request, Hotel $hotel)
     {
+        if ($request->image) {
+            if ($request->name != $hotel->name) {
+                ImageHelper::delete([
+                    public_path('images') . '/' . $hotel->image
+                ]);
+            }
+
+            $filename = Str::slug($request->name, '-');
+            $image = ImageHelper::singleUpload($filename, 'images', $request->image);
+        }
+
         $updateHotel = $hotel->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -72,7 +91,8 @@ class HotelController extends Controller
             'region_id' => $request->region_id,
             'telephone' => $request->telephone,
             'city' => $request->city,
-            'address' => $request->address
+            'address' => $request->address,
+            'image' => $image ?? $hotel->image,
         ]);
 
         if ($updateHotel) {
@@ -87,6 +107,10 @@ class HotelController extends Controller
         $deleteHotel = $hotel->delete();
 
         if ($deleteHotel) {
+            ImageHelper::delete([
+                public_path('images') . '/' . $hotel->image
+            ]);
+
             return redirect()->route('hotels')->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');

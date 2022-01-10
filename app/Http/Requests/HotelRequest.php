@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class HotelRequest extends FormRequest
 {
@@ -23,15 +24,49 @@ class HotelRequest extends FormRequest
      */
     public function rules()
     {
+        $hotel = $this->route()->parameter('hotel');
+        $id = $hotel ? $hotel->id : $hotel;
+
         return [
-            'name' => 'string|required',
-            'email' => 'email|required|unique:hotels,email,' . $this->hotel->id ?? null . ',id',
-            'telephone' => 'string|required|unique:hotels,telephone,' . $this->hotel->id ?? null . ',id',
-            'manager_id' => 'integer|required',
-            'foreman_id' => 'integer|required',
-            'region_id' => 'integer|required',
-            'city' => 'string|nullable',
-            'address' => 'string|nullable'
+            'name' => [
+                'required',
+                'string'
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('hotels', 'email')->ignore($id)
+            ],
+            'telephone' => [
+                'required',
+                'string',
+                Rule::unique('hotels', 'telephone')->ignore($id)
+            ],
+            'manager_id' => [
+                'required',
+                'integer'
+            ],
+            'foreman_id' => [
+                'required',
+                'integer'
+            ],
+            'region_id' => [
+                'required',
+                'integer'
+            ],
+            'address' => [
+                'nullable',
+                'string'
+            ],
+            'city' => [
+                'nullable',
+                'string'
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg'
+            ],
         ];
     }
 }

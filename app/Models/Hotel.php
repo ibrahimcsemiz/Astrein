@@ -18,6 +18,7 @@ class Hotel extends Model
         'address',
         'foreman_id',
         'manager_id',
+        'image',
     ];
 
     public static function exists($id)
