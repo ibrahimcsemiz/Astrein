@@ -7,8 +7,7 @@ use App\Http\Requests\HotelRequest;
 use App\Models\Hotel;
 use App\Models\Region;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Nette\Utils\Image;
+use App\Services\HotelService;
 
 class HotelController extends Controller
 {
@@ -28,23 +27,9 @@ class HotelController extends Controller
         return view('hotels.create', compact('managers', 'foremans', 'regions'));
     }
 
-    public function store(HotelRequest $request)
+    public function store(HotelRequest $request, HotelService $hotelService)
     {
-        $filename = Str::slug($request->name, '-');
-
-        $image = ImageHelper::singleUpload($filename, 'images', $request->image);
-
-        $insertHotel = Hotel::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'manager_id' => $request->manager_id,
-            'foreman_id' => $request->foreman_id,
-            'region_id' => $request->region_id,
-            'telephone' => $request->telephone,
-            'city' => $request->city,
-            'address' => $request->address,
-            'image' => $image,
-        ]);
+        $insertHotel = $hotelService->store($request);
 
         if ($insertHotel) {
             return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
@@ -70,30 +55,9 @@ class HotelController extends Controller
         return view('hotels.edit', compact('hotel', 'managers', 'foremans', 'regions'));
     }
 
-    public function update(HotelRequest $request, Hotel $hotel)
+    public function update(HotelRequest $request, Hotel $hotel, HotelService $hotelService)
     {
-        if ($request->image) {
-            if ($request->name != $hotel->name) {
-                ImageHelper::delete([
-                    public_path('images') . '/' . $hotel->image
-                ]);
-            }
-
-            $filename = Str::slug($request->name, '-');
-            $image = ImageHelper::singleUpload($filename, 'images', $request->image);
-        }
-
-        $updateHotel = $hotel->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'manager_id' => $request->manager_id,
-            'foreman_id' => $request->foreman_id,
-            'region_id' => $request->region_id,
-            'telephone' => $request->telephone,
-            'city' => $request->city,
-            'address' => $request->address,
-            'image' => $image ?? $hotel->image,
-        ]);
+        $updateHotel = $hotelService->update($request, $hotel);
 
         if ($updateHotel) {
             return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
