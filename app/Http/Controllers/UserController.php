@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -20,37 +18,12 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(UserRequest $request)
+    public function store(UserRequest $request, UserService $userService)
     {
-        $password = Str::random(8);
+        $insertUser = $userService->store($request);
 
-        $response = DB::transaction(function() use ($request, $password) {
-            $insertUser = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'function' => $request->function,
-                'password' => Hash::make($password)
-            ]);
-
-            $insertContactInformation = $insertUser->contact()->create([
-                'telephone' => $request->telephone,
-                'city' => $request->city,
-                'address' => $request->address
-            ]);
-
-            $insertPersonalInformation = $insertUser->personal()->create([
-                'birth_date' => $request->birth_date
-            ]);
-
-            if ($insertUser && $insertContactInformation && $insertPersonalInformation) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        if ($response) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful. <br><b>Password:</b> ' . $password);
+        if ($insertUser) {
+            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
         }
@@ -68,34 +41,11 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $user, UserService $userService)
     {
-        $response = DB::transaction(function() use ($user, $request) {
+        $updateUser = $userService->update($request, $user);
 
-            $updateUser = $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'function' => $request->function
-            ]);
-
-            $updateContactInformation = $user->contact()->update([
-                'telephone' => $request->telephone,
-                'city' => $request->city,
-                'address' => $request->address
-            ]);
-
-            $updatePersonalInformation = $user->personal()->update([
-                'birth_date' => $request->birth_date
-            ]);
-
-            if ($updateUser && $updateContactInformation && $updatePersonalInformation) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        if ($response) {
+        if ($updateUser) {
             return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
