@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\EmployeeComponent;
 use App\Http\Livewire\HotelComponent;
@@ -23,11 +24,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('lang/{language}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
+
     Route::resource('users', UserController::class, ['except' => ['index']]);
     Route::resource('employees', EmployeeController::class, ['except' => ['index']]);
     Route::resource('hotels', HotelController::class, ['except' => ['index']]);

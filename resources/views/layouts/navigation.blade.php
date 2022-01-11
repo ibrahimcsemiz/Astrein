@@ -1,4 +1,4 @@
-<nav x-data="{ isMenuOpen: false, isProfileOpen: false }" class="bg-gray-800">
+<nav x-data="{ isMenuOpen: false, isProfileOpen: false, isSwitcherOpen: false }" class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -17,16 +17,16 @@
 
                 <x-slot name="links">
                     <x-navigation.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                        {{ __('Dashboard') }}
+                        {{ __('navigation.menu.dashboard') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
-                        {{ __('Users') }}
+                        {{ __('navigation.menu.users') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
-                        {{ __('Employees') }}
+                        {{ __('navigation.menu.employees') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
-                        {{ __('Hotels') }}
+                        {{ __('navigation.menu.hotels') }}
                     </x-navigation.link>
                 </x-slot>
 
@@ -34,7 +34,7 @@
 
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                <x-navigation.bell></x-navigation.bell>
+                <x-navigation.language></x-navigation.language>
 
                 <!-- Profile dropdown -->
                 <x-navigation.profile.dropdown>
@@ -45,13 +45,13 @@
 
                     <x-slot name="links">
                         <x-navigation.profile.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                            Password
+                            {{ __('navigation.profile.change_password') }}
                         </x-navigation.profile.link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-navigation.profile.link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('navigation.profile.logout') }}
                             </x-navigation.profile.link>
                         </form>
                     </x-slot>
@@ -66,16 +66,16 @@
 
         <x-slot name="links">
             <x-navigation.link class="block text-base" href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                {{ __('Dashboard') }}
+                {{ __('navigation.menu.dashboard') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
-                {{ __('Users') }}
+                {{ __('navigation.menu.users') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
-                {{ __('Employees') }}
+                {{ __('navigation.menu.employees') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
-                {{ __('Hotels') }}
+                {{ __('navigation.menu.hotels') }}
             </x-navigation.link>
         </x-slot>
 
