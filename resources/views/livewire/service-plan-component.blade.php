@@ -39,9 +39,6 @@
                     <x-slot name="title">Edit Service Plan</x-slot>
                     <x-slot name="content">
                         <x-form.input id="name" type="text" wire:model="name" placeholder="Name" />
-                        @if($errors->first('name'))
-                            {{ $errors->first('name') }}
-                        @endif
                     </x-slot>
                     <x-slot name="footer">
                         <x-form.button color="red" wire:click="$set('showEditModal', false)">
