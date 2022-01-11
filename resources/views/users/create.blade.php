@@ -10,7 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <x-notifications.validation />
                         <x-notifications.default />
                         <form action="{{ route('users.store') }}" method="post">
                             @csrf
@@ -36,7 +35,6 @@
                                                 </x-slot>
                                             </x-form.select>
                                         </div>
-
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                                             <x-form.label required>{{ __('Telephone') }}</x-form.label>
                                             <x-form.input id="telephone" type="text" name="telephone" value="{{ old('telephone') }}" required />
