@@ -14,7 +14,7 @@ class EmployeeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,10 +36,6 @@ class EmployeeRequest extends FormRequest
                 'required',
                 'email',
                 Rule::unique('users', 'email')->ignore($id)
-            ],
-            'function' => [
-                'required',
-                'string'
             ],
             'telephone' => [
                 'required',
