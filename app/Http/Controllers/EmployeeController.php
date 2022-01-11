@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Services\EmployeeService;
 
 class EmployeeController extends Controller
 {
@@ -20,37 +18,12 @@ class EmployeeController extends Controller
         return view('employees.create');
     }
 
-    public function store(EmployeeRequest $request)
+    public function store(EmployeeRequest $request, EmployeeService $employeeService)
     {
-        $password = Str::random(8);
+        $insertEmployee = $employeeService->store($request);
 
-        $response = DB::transaction(function() use ($request, $password) {
-            $insertEmployee = Employee::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'function' => 'Employee',
-                'password' => Hash::make($password)
-            ]);
-
-            $insertContactInformation = $insertEmployee->contact()->create([
-                'telephone' => $request->telephone,
-                'city' => $request->city,
-                'address' => $request->address
-            ]);
-
-            $insertPersonalInformation = $insertEmployee->personal()->create([
-                'birth_date' => $request->birth_date
-            ]);
-
-            if ($insertEmployee && $insertContactInformation && $insertPersonalInformation) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        if ($response) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful. <br><b>Password:</b> ' . $password);
+        if ($insertEmployee) {
+            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
         }
@@ -68,34 +41,11 @@ class EmployeeController extends Controller
         return view('employees.edit', compact('employee'));
     }
 
-    public function update(EmployeeRequest $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee, EmployeeService $employeeService)
     {
-        $response = DB::transaction(function() use ($employee, $request) {
+        $updateEmployee = $employeeService->update($request, $employee);
 
-            $updateEmployee = $employee->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'function' => $request->function
-            ]);
-
-            $updateContactInformation = $employee->contact()->update([
-                'telephone' => $request->telephone,
-                'city' => $request->city,
-                'address' => $request->address
-            ]);
-
-            $updatePersonalInformation = $employee->personal()->update([
-                'birth_date' => $request->birth_date
-            ]);
-
-            if ($updateEmployee && $updateContactInformation && $updatePersonalInformation) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        if ($response) {
+        if ($updateEmployee) {
             return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
@@ -105,9 +55,9 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        $deleteUser = $employee->delete();
+        $deleteEmployee = $employee->delete();
 
-        if ($deleteUser) {
+        if ($deleteEmployee) {
             return redirect()->route('employees')->notify('success', 'Success', 'The operation was successful.');
         } else {
             return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
