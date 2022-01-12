@@ -23,9 +23,9 @@ class EmployeeController extends Controller
         $insertEmployee = $employeeService->store($request);
 
         if ($insertEmployee) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -46,9 +46,9 @@ class EmployeeController extends Controller
         $updateEmployee = $employeeService->update($request, $employee);
 
         if ($updateEmployee) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -58,9 +58,9 @@ class EmployeeController extends Controller
         $deleteEmployee = $employee->delete();
 
         if ($deleteEmployee) {
-            return redirect()->route('employees')->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->route('employees')->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 }

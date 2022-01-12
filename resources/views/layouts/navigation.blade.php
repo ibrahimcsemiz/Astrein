@@ -17,16 +17,16 @@
 
                 <x-slot name="links">
                     <x-navigation.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                        {{ __('navigation.menu.dashboard') }}
+                        {{ __('language.dashboard') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
-                        {{ __('navigation.menu.users') }}
+                        {{ __('language.users') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
-                        {{ __('navigation.menu.employees') }}
+                        {{ __('language.employees') }}
                     </x-navigation.link>
                     <x-navigation.link href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
-                        {{ __('navigation.menu.hotels') }}
+                        {{ __('language.hotels') }}
                     </x-navigation.link>
                 </x-slot>
 
@@ -45,13 +45,13 @@
 
                     <x-slot name="links">
                         <x-navigation.profile.link href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                            {{ __('navigation.profile.change_password') }}
+                            {{ __('language.change_password') }}
                         </x-navigation.profile.link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-navigation.profile.link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('navigation.profile.logout') }}
+                                {{ __('language.logout') }}
                             </x-navigation.profile.link>
                         </form>
                     </x-slot>
@@ -66,16 +66,16 @@
 
         <x-slot name="links">
             <x-navigation.link class="block text-base" href="{{ route('dashboard') }}" active="{{ request()->routeIs('dashboard') }}">
-                {{ __('navigation.menu.dashboard') }}
+                {{ __('language.dashboard') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('users') }}" active="{{ request()->routeIs('users*') }}">
-                {{ __('navigation.menu.users') }}
+                {{ __('language.users') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('employees') }}" active="{{ request()->routeIs('employees*') }}">
-                {{ __('navigation.menu.employees') }}
+                {{ __('language.employees') }}
             </x-navigation.link>
             <x-navigation.link class="block text-base" href="{{ route('hotels') }}" active="{{ request()->routeIs('hotels*') }}">
-                {{ __('navigation.menu.hotels') }}
+                {{ __('language.hotels') }}
             </x-navigation.link>
         </x-slot>
 

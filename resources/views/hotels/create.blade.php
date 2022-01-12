@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Add New Hotel') }}
+        {{ __('language.add_new_hotel') }}
         <span class="float-right">
-            <x-links.button href="{{ route('hotels') }}" do="list">Hotels</x-links.button>
+            <x-links.button href="{{ route('hotels') }}" do="list">{{ __('language.hotels') }}</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">
@@ -17,22 +17,22 @@
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Name') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.name') }}</x-form.label>
                                             <x-form.input id="name" type="text" name="name" value="{{ old('name') }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Email') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.email') }}</x-form.label>
                                             <x-form.input id="email" type="email" name="email" value="{{ old('email') }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label>{{ __('Image') }}</x-form.label>
+                                            <x-form.label>{{ __('language.image') }}</x-form.label>
                                             <x-form.input id="image" type="file" name="image" />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Manager') }}</x-form.label>
-                                            <x-form.select id="manager_id" name="manager_id" data-placeholder="Select a manager" data-allow-clear="false" title="Select a manager" required>
+                                            <x-form.label required>{{ __('language.manager') }}</x-form.label>
+                                            <x-form.select id="manager_id" name="manager_id"required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_manager') }}</option>
                                                     @foreach($managers as $manager)
                                                         <option value="{{ $manager->id }}">{{ $manager->name }}</option>
                                                     @endforeach
@@ -41,10 +41,10 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Foreman') }}</x-form.label>
-                                            <x-form.select id="foreman_id" name="foreman_id" data-placeholder="Select a foreman" data-allow-clear="false" title="Select a foreman" required>
+                                            <x-form.label required>{{ __('language.foreman') }}</x-form.label>
+                                            <x-form.select id="foreman_id" name="foreman_id" required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_foreman') }}</option>
                                                     @foreach($foremans as $foreman)
                                                         <option value="{{ $foreman->id }}">{{ $foreman->name }}</option>
                                                     @endforeach
@@ -53,10 +53,10 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Region') }}</x-form.label>
-                                            <x-form.select id="region_id" name="region_id" data-placeholder="Select a region" data-allow-clear="false" title="Select a region" required>
+                                            <x-form.label required>{{ __('language.region') }}</x-form.label>
+                                            <x-form.select id="region_id" name="region_id" required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_region') }}</option>
                                                     @foreach($regions as $region)
                                                         <option value="{{ $region->id }}">{{ $region->name }}</option>
                                                     @endforeach
@@ -65,24 +65,24 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                            <x-form.label required>{{ __('Telephone') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.telephone') }}</x-form.label>
                                             <x-form.input id="telephone" type="text" name="telephone" value="{{ old('telephone') }}" required />
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                            <x-form.label>{{ __('City') }}</x-form.label>
+                                            <x-form.label>{{ __('language.city') }}</x-form.label>
                                             <x-form.input id="city" type="text" name="city" value="{{ old('city') }}" />
                                         </div>
 
                                         <div class="col-span-6">
-                                            <x-form.label>{{ __('Address') }}</x-form.label>
+                                            <x-form.label>{{ __('language.address') }}</x-form.label>
                                             <x-form.input id="address" type="text" name="address" value="{{ old('address') }}" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                     <x-form.button type="submit" color="green">
-                                        {{ __('Save') }}
+                                        {{ __('language.save') }}
                                     </x-form.button>
                                 </div>
                             </div>

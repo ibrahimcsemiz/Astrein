@@ -38,9 +38,9 @@ class ServicePlanComponent extends Component
         $delete = $servicePlan->delete();
 
         if ($delete) {
-            $this->notify('success', 'Success', 'The operation was successful.');
+            $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            $this->notify('error', 'Error', 'An error occurred during the operation.');
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -65,9 +65,9 @@ class ServicePlanComponent extends Component
         ]);
 
         if ($insert) {
-            $this->notify('success', 'Success', 'The operation was successful.');
+            $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            $this->notify('error', 'Error', 'An error occurred during the operation.');
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
 
         $this->showEditModal = false;
@@ -93,9 +93,9 @@ class ServicePlanComponent extends Component
         ]);
 
         if ($update) {
-            $this->notify('success', 'Success', 'The operation was successful.');
+            $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            $this->notify('error', 'Error', 'An error occurred during the operation.');
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
 
         $this->showEditModal = false;

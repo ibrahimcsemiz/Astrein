@@ -17,6 +17,8 @@ class EmployeeComponent extends Component
     public $limit = 10;
     public $pageLength = [10, 25, 100];
 
+    public Employee $employee;
+
     protected $queryString = [
         'search' => ['except' => ''],
         'page' => ['except' => 1]
@@ -32,13 +34,17 @@ class EmployeeComponent extends Component
         $this->resetPage();
     }
 
-    public function updateStatus($id)
+    public function updateStatus(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-        if ($employee) {
-            $employee->status = $employee->status == 1 ? 0 : 1;
-            $employee->save();
+        $employee->status = $employee->status == 1 ? 0 : 1;
+        $update = $employee->save();
+
+        if ($update) {
+            $this->notify('success', __('language.success'), __('language.success_message'));
+        } else {
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
+
     }
 
     public function updatingLimit()

@@ -45,7 +45,7 @@ class EmployeeService
             $updateEmployee = $employee->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'function' => $request->function
+                'function' => 'Employee'
             ]);
 
             $updateContactInformation = $employee->contact()->update([

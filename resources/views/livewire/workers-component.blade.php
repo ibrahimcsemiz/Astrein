@@ -3,7 +3,7 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <x-form.input wire:model.debounce.100ms="search" id="search" type="text" placeholder="Search by employee name (Please type minimum 3 characters)" />
+                    <x-form.input wire:model.debounce.100ms="search" id="search" type="text" placeholder="{{ __('language.search_by_employee_name') }} {{ __('language.please_type_minimum_3_characters') }}" />
                     @if(strlen($search) >= 3)
                         <x-table hv="vertical" class="mt-0 py-0">
                             <x-slot name="rows">
@@ -22,7 +22,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                                 </svg>
-                                                No results
+                                                {{ __('language.no_results') }}
                                             </div>
                                         </x-table.th>
                                     </tr>
@@ -42,9 +42,9 @@
                         <x-table>
                             <x-slot name="thead">
                                 <tr>
-                                    <x-table.th colspan="2" class="text-center text-lg bg-gray-100">Employees</x-table.th>
+                                    <x-table.th colspan="2" class="text-center text-lg bg-gray-100">{{ __('language.employees') }}</x-table.th>
                                 </tr>
-                                <x-table.th>Name</x-table.th>
+                                <x-table.th>{{ __('language.name') }}</x-table.th>
                                 <x-table.th manage="1"></x-table.th>
                             </x-slot>
                             <x-slot name="tbody">
@@ -60,14 +60,14 @@
                                         </x-table.td>
                                     @endif
                                     <x-table.td>
-                                        <x-links.default wire:click="destroy({{ $employee->id }})" onclick="return confirm('Are you sure?') || event.stopImmediatePropagation()">Delete</x-links.default>
+                                        <x-links.default wire:click="destroy({{ $employee->id }})" onclick="return confirm('{{ __('language.are_you_sure') }}') || event.stopImmediatePropagation()">{{ __('language.delete') }}</x-links.default>
                                     </x-table.td>
                                 </tr>
                             @endforeach
                             </x-slot>
                         </x-table>
                     @else
-                        {{ 'Employee Not Found' }}
+                        {{ __('language.employee_not_found') }}
                     @endif
                 </div>
             </div>

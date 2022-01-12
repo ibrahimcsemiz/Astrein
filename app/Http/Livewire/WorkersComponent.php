@@ -22,9 +22,9 @@ class WorkersComponent extends Component
         $attach = $user->hotel()->syncWithoutDetaching([$this->hotelId]);
 
         if ($attach) {
-            $this->notify('success', 'Success', 'The operation was successful.');
+            $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            $this->notify('error', 'Error', 'An error occurred during the operation.');
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -33,9 +33,9 @@ class WorkersComponent extends Component
         $detach = $user->hotel()->detach($this->hotelId);
 
         if ($detach) {
-            $this->notify('success', 'Success', 'The operation was successful.');
+            $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            $this->notify('error', 'Error', 'An error occurred during the operation.');
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 

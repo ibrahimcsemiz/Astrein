@@ -37,12 +37,5 @@
                 @livewireScripts
             </main>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.select2picker').select2();
-            });
-        </script>
     </body>
 </html>

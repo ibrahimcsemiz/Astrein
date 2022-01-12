@@ -1,8 +1,8 @@
 <x-slot name="header">
-    {{ __('Users') }}
+    {{ __('language.employees') }}
     <span class="float-right">
         <x-links.button href="{{ route('employees.create') }}" do="create">
-            {{ __('Add New Employee') }}
+            {{ __('language.add_new_employee') }}
         </x-links.button>
     </span>
 </x-slot>
@@ -15,14 +15,14 @@
                 <x-notifications.default />
                 <div class="lg:flex">
                     <div class="w-full mr-1">
-                        <x-form.input wire:model.live="search" id="name" type="text" placeholder="Search by name, telephone or hotels" />
+                        <x-form.input wire:model.live="search" id="name" type="text" placeholder="{{ __('language.search_by_name_telephone_or_hotels') }}" />
                     </div>
                     <div class="w-full mr-1">
                         <x-form.select wire:model.live="status">
                             <x-slot name="options">
-                                <option value="">Search by status</option>
-                                <option value="1">Active</option>
-                                <option value="0">Banned</option>
+                                <option value="">{{ __('language.search_by_status') }}</option>
+                                <option value="1">{{ __('language.active') }}</option>
+                                <option value="0">{{ __('language.banned') }}</option>
                             </x-slot>
                         </x-form.select>
                     </div>
@@ -32,7 +32,7 @@
                                 <option value="10">10</option>
                                 <option value="25">25</option>
                                 <option value="100">100</option>
-                                <option value="0">{{ __('All') }}</option>
+                                <option value="0">{{ __('language.all') }}</option>
                             </x-slot>
                         </x-form.select>
                     </div>
@@ -41,7 +41,7 @@
                     <x-slot name="thead">
                         <x-table.th>
                             <x-links.default class="items-center flex"  wire:click="sortBy('name')" direction="{{ $sortField === 'name' ? $sortDirection : null }}">
-                                Name
+                                {{ __('language.name') }}
                                 @if($sortField == 'created_at')
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -58,13 +58,13 @@
                             </x-links.default>
                         </x-table.th>
                         <x-table.th>
-                            <a>Telephone</a>
+                            {{ __('language.telephone') }}
                         </x-table.th>
                         <x-table.th>
-                            Hotels
+                            {{ __('language.hotels') }}
                         </x-table.th>
                         <x-table.th>
-                            <a>Status</a>
+                            {{ __('language.status') }}
                         </x-table.th>
                         <x-table.th manage="1"></x-table.th>
                     </x-slot>
@@ -93,7 +93,7 @@
                             </x-table.td>
                             <x-table.td>
                                 <x-links.default href="{{ route('employees.edit', $employee->id) }}">
-                                    {{ __('Edit') }}
+                                    {{ __('language.edit') }}
                                 </x-links.default>
                             </x-table.td>
                         </tr>
@@ -104,7 +104,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
-                                    No results were found matching your search criteria.
+                                    {{ __('language.no_results_were_found_matching_your_search_criteria') }}
                                 </div>
                             </x-table.td>
                         </tr>
@@ -117,4 +117,5 @@
             </div>
         </div>
     </div>
+    <x-notifications.livewire />
 </div>

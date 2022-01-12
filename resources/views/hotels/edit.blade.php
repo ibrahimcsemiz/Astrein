@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Edit Hotel') }}
+        {{ __('language.edit_hotel') }}
         <span class="float-right">
-            <x-links.button href="{{ route('hotels') }}" do="list">Hotels</x-links.button>
+            <x-links.button href="{{ route('hotels') }}" do="list">{{ __('language.hotels') }}</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">
@@ -18,22 +18,22 @@
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Name') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.name') }}</x-form.label>
                                             <x-form.input id="name" type="text" name="name" value="{{ $hotel->name }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Email') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.email') }}</x-form.label>
                                             <x-form.input id="email" type="email" name="email" value="{{ $hotel->email }}" required />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label>{{ __('Image') }}</x-form.label>
+                                            <x-form.label>{{ __('language.image') }}</x-form.label>
                                             <x-form.input id="image" type="file" name="image" />
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Manager') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.manager') }}</x-form.label>
                                             <x-form.select id="manager_id" name="manager_id" required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_manager') }}</option>
                                                     @foreach($managers as $manager)
                                                         <option value="{{ $manager->id }}"{{ $hotel->manager_id == $manager->id ? ' selected' : '' }}>{{ $manager->name }}</option>
                                                     @endforeach
@@ -42,10 +42,10 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Foreman') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.foreman') }}</x-form.label>
                                             <x-form.select id="foreman_id" name="foreman_id" required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_foreman') }}</option>
                                                     @foreach($foremans as $foreman)
                                                         <option value="{{ $foreman->id }}"{{ $hotel->foreman_id == $foreman->id ? ' selected' : '' }}>{{ $foreman->name }}</option>
                                                     @endforeach
@@ -54,10 +54,10 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-2">
-                                            <x-form.label required>{{ __('Region') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.region') }}</x-form.label>
                                             <x-form.select id="region_id" name="region_id" required>
                                                 <x-slot name="options">
-                                                    <option value=""></option>
+                                                    <option value="">{{ __('language.select_a_region') }}</option>
                                                     @foreach($regions as $region)
                                                         <option value="{{ $region->id }}"{{ $hotel->region_id == $region->id ? ' selected' : '' }}>{{ $region->name }}</option>
                                                     @endforeach
@@ -66,24 +66,24 @@
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                            <x-form.label required>{{ __('Telephone') }}</x-form.label>
+                                            <x-form.label required>{{ __('language.telephone') }}</x-form.label>
                                             <x-form.input id="telephone" type="text" name="telephone" value="{{ $hotel->telephone }}" required />
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                            <x-form.label>{{ __('City') }}</x-form.label>
+                                            <x-form.label>{{ __('language.city') }}</x-form.label>
                                             <x-form.input id="city" type="text" name="city" value="{{ $hotel->city }}" />
                                         </div>
 
                                         <div class="col-span-6">
-                                            <x-form.label>{{ __('Address') }}</x-form.label>
+                                            <x-form.label>{{ __('language.address') }}</x-form.label>
                                             <x-form.input id="address" type="text" name="address" value="{{ $hotel->address }}" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                     <x-form.button type="submit" color="green">
-                                        {{ __('Save') }}
+                                        {{ __('language.save') }}
                                     </x-form.button>
                                 </div>
                             </div>
@@ -91,8 +91,8 @@
                         <form action="{{ route('hotels.destroy', $hotel->id) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <x-form.button onclick="return confirm('Are you sure?')" color="red" class="mt-2">
-                                {{ __('Delete') }}
+                            <x-form.button onclick="return confirm('{{ __('language.are_you_sure') }}')" color="red" class="mt-2">
+                                {{ __('language.delete') }}
                             </x-form.button>
                         </form>
                     </div>

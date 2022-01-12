@@ -23,9 +23,9 @@ class UserController extends Controller
         $insertUser = $userService->store($request);
 
         if ($insertUser) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -46,9 +46,9 @@ class UserController extends Controller
         $updateUser = $userService->update($request, $user);
 
         if ($updateUser) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -57,9 +57,9 @@ class UserController extends Controller
         $deleteUser = $user->delete();
 
         if ($deleteUser) {
-            return redirect()->route('users')->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->route('users')->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 }

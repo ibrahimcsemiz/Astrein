@@ -32,9 +32,9 @@ class HotelController extends Controller
         $insertHotel = $hotelService->store($request);
 
         if ($insertHotel) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -60,9 +60,9 @@ class HotelController extends Controller
         $updateHotel = $hotelService->update($request, $hotel);
 
         if ($updateHotel) {
-            return redirect()->back()->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
@@ -75,9 +75,9 @@ class HotelController extends Controller
                 public_path('images') . '/' . $hotel->image
             ]);
 
-            return redirect()->route('hotels')->notify('success', 'Success', 'The operation was successful.');
+            return redirect()->route('hotels')->notify('success', __('language.success'), __('language.success_message'));
         } else {
-            return redirect()->back()->notify('error', 'Error', 'An error occurred during the operation.');
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 }

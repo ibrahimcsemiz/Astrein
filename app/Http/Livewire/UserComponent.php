@@ -18,6 +18,8 @@ class UserComponent extends Component
     public $limit = 10;
     public $pageLength = [10, 25, 100];
 
+    public User $user;
+
     protected $queryString = [
         'search' => ['except' => ''],
         'page' => ['except' => 1]
@@ -43,12 +45,15 @@ class UserComponent extends Component
         $this->resetPage();
     }
 
-    public function updateStatus($id)
+    public function updateStatus(User $user)
     {
-        $user = User::findOrFail($id);
-        if ($user) {
-            $user->status = $user->status == 1 ? 0 : 1;
-            $user->save();
+        $user->status = $user->status == 1 ? 0 : 1;
+        $update = $user->save();
+
+        if ($update) {
+            $this->notify('success', __('language.success'), __('language.success_message'));
+        } else {
+            $this->notify('error', __('language.error'), __('language.error_message'));
         }
     }
 
