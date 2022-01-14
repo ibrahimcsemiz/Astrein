@@ -28,13 +28,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('lang/{language}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
 
-    Route::resource('users', UserController::class, ['except' => ['index']]);
-    Route::resource('employees', EmployeeController::class, ['except' => ['index']]);
-    Route::resource('hotels', HotelController::class, ['except' => ['index']]);
+    Route::resource('users', UserController::class);
+    Route::resource('employees', EmployeeController::class);
+    Route::resource('hotels', HotelController::class);
 
-    Route::get('/users', UserComponent::class)->name('users');
-    Route::get('/employees', EmployeeComponent::class)->name('employees');
-    Route::get('/hotels', HotelComponent::class)->name('hotels');
+    //Route::get('/users', UserComponent::class)->name('users');
+    //Route::get('/employees', EmployeeComponent::class)->name('employees');
+    //Route::get('/hotels', HotelComponent::class)->name('hotels');
 });
 
 /*Route::get('/get-cities', function () {
