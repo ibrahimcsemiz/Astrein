@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('language.add_new_hotel') }}
+        {{ __('language.hotels') }}
         <span class="float-right">
-            <x-links.button href="{{ route('hotels.index') }}" do="list">{{ __('language.hotels') }}</x-links.button>
+            <x-links.button href="{{ route('hotels.create') }}" do="create">{{ __('language.add_new_hotel') }}</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">

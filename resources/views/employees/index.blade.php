@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('language.add_new_employee') }}
+        {{ __('language.employees') }}
         <span class="float-right">
-            <x-links.button href="{{ route('employees.index') }}" do="list">{{ __('language.employees') }}</x-links.button>
+            <x-links.button href="{{ route('employees.create') }}" do="create">{{ __('language.add_new_employee') }}</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">

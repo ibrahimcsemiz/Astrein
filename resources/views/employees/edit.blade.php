@@ -2,7 +2,7 @@
     <x-slot name="header">
         {{ __('language.edit_employee') }}
         <span class="float-right">
-            <x-links.button href="{{ route('employees') }}" do="list">{{ __('language.employees') }}</x-links.button>
+            <x-links.button href="{{ route('employees.index') }}" do="list">{{ __('language.employees') }}</x-links.button>
         </span>
     </x-slot>
     <div class="py-6">
