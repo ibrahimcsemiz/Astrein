@@ -2,12 +2,17 @@
     <div>
         <button x-on:click="isSwitcherOpen = !isSwitcherOpen"
                 type="button"
-                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                class="bg-gray-800 flex"
                 id="language-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true">
             <span class="sr-only">Open language menu</span>
-            <img class="h-8 w-8 rounded-full" src="{{ asset('flags/' . Config::get('languages')[App::getLocale()]['icon']) }}" alt="{{ Config::get('languages')[App::getLocale()]['display'] }}">
+            <span class="font-medium text-white flex items-center">
+                {{ Config::get('languages')[App::getLocale()]['display'] }}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </span>
         </button>
     </div>
     <div x-show="isSwitcherOpen"
@@ -20,7 +25,6 @@
         @foreach(Config::get('languages') as $lang => $language)
             @if($lang != App::getLocale())
                 <a class="flex px-4 py-2 text-sm text-gray-700" href="{{ route('language.switch', $lang) }}">
-                    <img src="{{ asset('flags/' . $language['icon']) }}" alt="{{ $language['display'] }}" class="flex-shrink-0 mr-2 h-6 w-6 rounded-full">
                     {{ $language['display'] }}
                 </a>
             @endif
