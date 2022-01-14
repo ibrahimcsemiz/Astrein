@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Dashboard') }}
+        {{ __('language.dashboard') }}
     </x-slot>
 
     <div class="py-12">
