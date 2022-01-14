@@ -11,10 +11,9 @@ use App\Services\HotelService;
 
 class HotelController extends Controller
 {
-
     public function index()
     {
-        //
+        return view('hotels.index');
     }
 
     public function create()
