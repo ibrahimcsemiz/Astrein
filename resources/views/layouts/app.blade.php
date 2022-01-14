@@ -32,6 +32,8 @@
 
             <!-- Page Content -->
             <main>
+                <x-notifications.default />
+                <x-notifications.livewire />
                 {{ $slot }}
 
                 @livewireScripts
