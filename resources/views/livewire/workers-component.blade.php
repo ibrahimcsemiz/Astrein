@@ -80,5 +80,4 @@
             </div>
         </div>
     </div>
-    <x-notifications.livewire />
 </div>

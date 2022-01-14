@@ -59,5 +59,4 @@
             </form>
         </div>
     </div>
-    <x-notifications.livewire />
 </div>
