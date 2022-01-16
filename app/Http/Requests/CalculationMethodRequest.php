@@ -24,7 +24,7 @@ class CalculationMethodRequest extends FormRequest
      */
     public function rules()
     {
-        $calculationMethod = $this->route()->parameter('calculation-methods');
+        $calculationMethod = $this->route()->parameter('calculation_method');
         $id = $calculationMethod ? $calculationMethod->id : $calculationMethod;
 
         return [

@@ -37,12 +37,18 @@ class CalculationMethodController extends Controller
 
     public function edit(CalculationMethod $calculationMethod)
     {
-        //
+        return view('calculation-methods.edit', compact('calculationMethod'));
     }
 
     public function update(CalculationMethodRequest $request, CalculationMethod $calculationMethod, CalculationMethodService $calculationMethodService)
     {
-        //
+        $updateCalculationMethod = $calculationMethodService->update($request, $calculationMethod);
+
+        if ($updateCalculationMethod) {
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
+        } else {
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
+        }
     }
 
     public function destroy(CalculationMethod $calculationMethod)

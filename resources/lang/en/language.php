@@ -63,4 +63,5 @@ return [
     'add_new_calculation_method' => 'Add New Calculation Method',
     'calculation_per_minute' => 'Calculation per Minute',
     'editable' => 'Editable',
+    'edit_calculation_method' => 'Edit Calculation Method',
 ];
