@@ -64,4 +64,5 @@ return [
     'calculation_per_minute' => 'Calculation per Minute',
     'editable' => 'Editable',
     'edit_calculation_method' => 'Edit Calculation Method',
+    'search_by_name' => 'Search by name',
 ];
