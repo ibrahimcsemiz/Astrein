@@ -18,22 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*for ($i = 0; $i < 155; $i++) {
-            $user = User::factory()->create();
-
-            $contact = ContactInformation::factory()
-                ->count(1)
-                ->for($user)
-                ->create();
-
-            $personal = PersonalInformation::factory()
-                ->count(1)
-                ->for($user)
-                ->create();
-        }*/
-
-        /*for ($i = 0; $i < 58; $i++) {
-            $hotel = Hotel::factory()->create();
-        }*/
+        $this->call([
+            UsersTableSeeder::class,
+            RegionTableSeeder::class,
+            HotelsTableSeeder::class,
+        ]);
     }
 }
