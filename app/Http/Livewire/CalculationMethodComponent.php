@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class CalculationMethodComponent extends Component
 {
     use WithPagination;
+
     public $search;
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
