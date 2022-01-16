@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-form.label required>{{ __('language.editable') }}</x-form.label>
-                                            <x-form.input id="editable" type="number" name="editable" value="0" required />
+                                            <x-form.input id="editable" type="number" name="editable" value="{{ old('editable') }}" required />
                                         </div>
                                     </div>
                                 </div>
