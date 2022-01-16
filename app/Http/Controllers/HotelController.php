@@ -74,7 +74,7 @@ class HotelController extends Controller
                 public_path('images') . '/' . $hotel->image
             ]);
 
-            return redirect()->route('hotels')->notify('success', __('language.success'), __('language.success_message'));
+            return redirect()->route('hotels.index')->notify('success', __('language.success'), __('language.success_message'));
         } else {
             return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }

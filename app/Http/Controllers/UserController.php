@@ -57,7 +57,7 @@ class UserController extends Controller
         $deleteUser = $user->delete();
 
         if ($deleteUser) {
-            return redirect()->route('users')->notify('success', __('language.success'), __('language.success_message'));
+            return redirect()->route('users.index')->notify('success', __('language.success'), __('language.success_message'));
         } else {
             return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }

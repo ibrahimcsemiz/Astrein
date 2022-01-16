@@ -58,7 +58,7 @@ class EmployeeController extends Controller
         $deleteEmployee = $employee->delete();
 
         if ($deleteEmployee) {
-            return redirect()->route('employees')->notify('success', __('language.success'), __('language.success_message'));
+            return redirect()->route('employees.index')->notify('success', __('language.success'), __('language.success_message'));
         } else {
             return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
         }
