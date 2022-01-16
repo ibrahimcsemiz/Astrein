@@ -58,5 +58,6 @@ return [
     'success_message' => 'The operation was successful.',
     'error' => 'Error',
     'error_message' => 'An error occurred during the operation.',
-
+    'calculation_methods' => 'Calculation Methods',
+    'settings' => 'Settings'
 ];

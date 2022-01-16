@@ -1,4 +1,4 @@
-<nav x-data="{ isMenuOpen: false, isProfileOpen: false, isSwitcherOpen: false }" class="bg-gray-800">
+<nav x-data="{ isMenuOpen: false, isProfileOpen: false, isSwitcherOpen: false, isSettingsOpen: false }" class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -33,7 +33,7 @@
             </x-navigation.menu>
 
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
+                <x-navigation.settings></x-navigation.settings>
                 <x-navigation.language></x-navigation.language>
 
                 <!-- Profile dropdown -->
