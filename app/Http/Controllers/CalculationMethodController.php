@@ -53,6 +53,12 @@ class CalculationMethodController extends Controller
 
     public function destroy(CalculationMethod $calculationMethod)
     {
-        //
+        $deleteCalculationMethod = $calculationMethod->delete();
+
+        if ($deleteCalculationMethod) {
+            return redirect()->route('calculation-methods.index')->notify('success', __('language.success'), __('language.success_message'));
+        } else {
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
+        }
     }
 }
