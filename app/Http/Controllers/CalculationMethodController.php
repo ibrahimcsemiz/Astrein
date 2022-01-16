@@ -2,82 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CalculationMethodRequest;
 use App\Models\CalculationMethod;
+use App\Services\CalculationMethodService;
 use Illuminate\Http\Request;
 
 class CalculationMethodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('calculation-methods.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('calculation-methods.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CalculationMethodRequest $request, CalculationMethodService $calculationMethodService)
     {
-        //
+        $insertCalculationMethod = $calculationMethodService->store($request);
+
+        if ($insertCalculationMethod) {
+            return redirect()->back()->notify('success', __('language.success'), __('language.success_message'));
+        } else {
+            return redirect()->back()->notify('error', __('language.error'), __('language.error_message'));
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CalculationMethod  $calculationMethod
-     * @return \Illuminate\Http\Response
-     */
     public function show(CalculationMethod $calculationMethod)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CalculationMethod  $calculationMethod
-     * @return \Illuminate\Http\Response
-     */
     public function edit(CalculationMethod $calculationMethod)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CalculationMethod  $calculationMethod
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CalculationMethod $calculationMethod)
+    public function update(CalculationMethodRequest $request, CalculationMethod $calculationMethod, CalculationMethodService $calculationMethodService)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CalculationMethod  $calculationMethod
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(CalculationMethod $calculationMethod)
     {
         //

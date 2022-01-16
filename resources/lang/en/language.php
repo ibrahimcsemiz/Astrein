@@ -59,5 +59,8 @@ return [
     'error' => 'Error',
     'error_message' => 'An error occurred during the operation.',
     'calculation_methods' => 'Calculation Methods',
-    'settings' => 'Settings'
+    'settings' => 'Settings',
+    'add_new_calculation_method' => 'Add New Calculation Method',
+    'calculation_per_minute' => 'Calculation per Minute',
+    'editable' => 'Editable',
 ];
