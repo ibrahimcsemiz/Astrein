@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CalculationMethodRequest;
 use App\Models\CalculationMethod;
 use App\Services\CalculationMethodService;
-use Illuminate\Http\Request;
 
 class CalculationMethodController extends Controller
 {
