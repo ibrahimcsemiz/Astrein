@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalculationMethodController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LanguageController;
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', UserController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('hotels', HotelController::class);
+    Route::resource('calculation-methods', CalculationMethodController::class);
 
     //Route::get('/users', UserComponent::class)->name('users');
     //Route::get('/employees', EmployeeComponent::class)->name('employees');
