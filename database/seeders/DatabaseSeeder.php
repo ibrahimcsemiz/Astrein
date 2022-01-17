@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RegionTableSeeder::class,
             HotelsTableSeeder::class,
+            ServicePlansTableSeeder::class,
             CalculationMethodsTableSeeder::class,
         ]);
     }

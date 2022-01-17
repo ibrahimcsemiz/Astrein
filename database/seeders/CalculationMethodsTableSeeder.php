@@ -14,12 +14,10 @@ class CalculationMethodsTableSeeder extends Seeder
      */
     public function run()
     {
-        $minute = [15, 30, 60];
-
         for ($i = 1; $i < 10; $i++) {
             $insertCalculationMethod = CalculationMethod::create([
                 'name' => 'Test Method ' . $i,
-                'calculation_per_minute' => $minute[array_rand($minute)],
+                'calculation_per_minute' => 1,
                 'editable' => 1
             ]);
         }
