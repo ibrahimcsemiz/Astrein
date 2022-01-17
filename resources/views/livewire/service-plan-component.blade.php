@@ -46,9 +46,10 @@
                     <x-slot name="title">{{ __('language.edit') }}</x-slot>
                     <x-slot name="content">
                         <x-form.input id="name" type="text" wire:model="name" placeholder="{{ __('language.name') }}" />
+                        <x-form.input id="sunday-wage" type="number" wire:model="sunday_wage" placeholder="{{ __('language.sunday_wage') }}" />
                     </x-slot>
                     <x-slot name="footer">
-                        <x-form.button color="red" wire:click="$set('showEditModal', false)">
+                        <x-form.button type="reset" color="red" wire:click="$set('showEditModal', false)">
                             {{ __('language.cancel') }}
                         </x-form.button>
                         <x-form.button color="green" type="submit">

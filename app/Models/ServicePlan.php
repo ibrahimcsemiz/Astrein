@@ -11,6 +11,7 @@ class ServicePlan extends Model
 
     protected $fillable = [
         'name',
-        'hotel_id'
+        'hotel_id',
+        'sunday_wage',
     ];
 }

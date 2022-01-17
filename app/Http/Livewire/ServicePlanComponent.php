@@ -13,6 +13,7 @@ class ServicePlanComponent extends Component
 
     public $hotelId;
     public $name;
+    public $sunday_wage;
     public $model;
 
     public ServicePlan $servicePlan;
@@ -28,6 +29,10 @@ class ServicePlanComponent extends Component
                     return $query->where('hotel_id', $this->hotelId)
                         ->where('id', '!=', $this->servicePlan->id);
                 })
+            ],
+            'sunday_wage' => [
+                'required',
+                'integer'
             ]
         ];
     }
@@ -49,6 +54,7 @@ class ServicePlanComponent extends Component
         $this->servicePlan = $this->servicePlan ?? $servicePlan::make();
 
         $this->name = '';
+        $this->sunday_wage = '';
 
         $this->model = 'store';
 
@@ -61,6 +67,7 @@ class ServicePlanComponent extends Component
 
         $insert = $this->servicePlan->create([
             'name' => $this->name,
+            'sunday_wage' => $this->sunday_wage,
             'hotel_id' => $this->hotelId
         ]);
 
@@ -80,6 +87,7 @@ class ServicePlanComponent extends Component
         $this->servicePlan = $servicePlan;
 
         $this->name = $servicePlan->name;
+        $this->sunday_wage = $servicePlan->sunday_wage;
 
         $this->showEditModal = true;
     }
@@ -89,7 +97,8 @@ class ServicePlanComponent extends Component
         $this->validate();
 
         $update = $this->servicePlan->update([
-            'name' => $this->name
+            'name' => $this->name,
+            'sunday_wage' => $this->sunday_wage,
         ]);
 
         if ($update) {
