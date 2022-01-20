@@ -20,6 +20,7 @@ return [
     'telephone' => 'Telephone',
     'status' => 'Status',
     'edit' => 'Edit',
+    'add' => 'Add',
     'no_results_were_found_matching_your_search_criteria' => 'No results were found matching your search criteria',
     'search_by_name_telephone_or_hotels' => 'Search by name, telephone or hotels',
     'search_by_name_telephone_city_foreman_or_manager' => 'Search by name, telephone, city, foreman or manager',
@@ -66,4 +67,7 @@ return [
     'edit_calculation_method' => 'Edit Calculation Method',
     'search_by_name' => 'Search by name',
     'sunday_wage' => 'Sunday Wage',
+    'calculation_method_not_found' => 'Calculation method not found',
+    'hourly_wage' => 'Hourly Wage',
+    'select_a_calculation_method' => 'Select a calculation method',
 ];

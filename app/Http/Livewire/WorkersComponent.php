@@ -21,7 +21,7 @@ class WorkersComponent extends Component
     {
         $attach = $user->hotel()->syncWithoutDetaching([$this->hotelId]);
 
-        if ($attach) {
+        if ($attach['attached'] ?? false) {
             $this->notify('success', __('language.success'), __('language.success_message'));
         } else {
             $this->notify('error', __('language.error'), __('language.error_message'));

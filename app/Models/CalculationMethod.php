@@ -14,4 +14,11 @@ class CalculationMethod extends Model
         'calculation_per_minute',
         'editable'
     ];
+
+    public function hotel()
+    {
+        return $this->belongsToMany(Hotel::class, 'hotel_calculation_method')
+            ->withPivot('id', 'hourly_wage')
+            ->withTimestamps();
+    }
 }

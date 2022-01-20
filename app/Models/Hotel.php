@@ -26,6 +26,13 @@ class Hotel extends Model
         return $this->hasMany(ServicePlan::class);
     }
 
+    public function calculationMethods()
+    {
+        return $this->belongsToMany(CalculationMethod::class, 'hotel_calculation_method')
+            ->withPivot('id', 'hourly_wage')
+            ->withTimestamps();
+    }
+
     public function employees()
     {
         return $this->belongsToMany(User::class);
