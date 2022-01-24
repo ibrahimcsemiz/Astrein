@@ -70,4 +70,9 @@ return [
     'calculation_method_not_found' => 'Calculation method not found',
     'hourly_wage' => 'Hourly Wage',
     'select_a_calculation_method' => 'Select a calculation method',
+    'manage' => 'Manage',
+    'price' => 'Price',
+    'time' => 'Time',
+    'price_2' => 'Price 2',
+    'time_2' => 'Time 2'
 ];

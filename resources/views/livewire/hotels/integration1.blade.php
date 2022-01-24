@@ -19,10 +19,10 @@
                         <x-table.th manage="1"></x-table.th>
                     </x-slot>
                     <x-slot name="tbody">
-                        @forelse($hotelCalculationMethods[0]->calculationMethods ?? [] as $hotelCalculationMethod)
+                        @forelse($hotelCalculationMethods ?? [] as $hotelCalculationMethod)
                             <tr>
                                 <x-table.td>{{ $hotelCalculationMethod->name }}</x-table.td>
-                                <x-table.td>€{{ $hotelCalculationMethod->pivot->hourly_wage / 100 }}</x-table.td>
+                                <x-table.td>€{{ Str::getPrice($hotelCalculationMethod->pivot->hourly_wage) }}</x-table.td>
                                 <x-table.td>
                                     <x-links.default wire:click="edit({{ $hotelCalculationMethod }})" class="border-r mr-1">{{ __('language.edit') }}</x-links.default>
                                     <x-links.default wire:click="destroy({{ $hotelCalculationMethod }})" onclick="return confirm('{{ __('language.are_you_sure') }}') || event.stopImmediatePropagation()">{{ __('language.delete') }}</x-links.default>

@@ -8,6 +8,7 @@ namespace App\Http\Livewire\Hotels;
 
 use App\Models\CalculationMethod;
 use App\Models\Hotel;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -67,7 +68,7 @@ class Integration1 extends Component
 
         if ($attach['attached'] ?? false) {
             $this->hotel->calculationMethods()->updateExistingPivot($attach['attached'][0], [
-                'hourly_wage' => $this->hourly_wage * 100
+                'hourly_wage' => Str::setPrice($this->hourly_wage),
             ]);
 
             $this->notify('success', __('language.success'), __('language.success_message'));
@@ -86,7 +87,7 @@ class Integration1 extends Component
 
         $hotel = $this->hotel->calculationMethods()->wherePivot('calculation_method_id', $calculationMethod->id)->get();
 
-        $this->hourly_wage = $hotel[0]->pivot->hourly_wage / 100;
+        $this->hourly_wage = Str::getPrice($hotel[0]->pivot->hourly_wage);
 
         $this->pivot = $hotel[0]->pivot->id;
 
@@ -98,7 +99,7 @@ class Integration1 extends Component
         $this->validate();
 
         $update = $this->hotel->calculationMethods()->wherePivot('calculation_method_id', $this->calculationMethod->id)->update([
-            'hourly_wage' => $this->hourly_wage * 100
+            'hourly_wage' => Str::setPrice($this->hourly_wage),
         ]);
 
 
@@ -113,21 +114,15 @@ class Integration1 extends Component
 
     public function render()
     {
-        $hotelCalculationMethods = Hotel::with('calculationMethods')
-            ->whereHas('calculationMethods', function ($hotelCalculationMethods) {
-                $hotelCalculationMethods->where('hotel_id', $this->hotelId);
-            })
-            ->get();
+        $hotelCalculationMethods = $this->hotel->calculationMethods()->get();
 
-
-        if ($hotelCalculationMethods[0] ?? false) {
-            $hotelCalculationMethodIds = $hotelCalculationMethods[0]->calculationMethods->pluck('id')->toArray();
+        if ($hotelCalculationMethods ?? false) {
+            $hotelCalculationMethodIds = $hotelCalculationMethods->pluck('id')->toArray();
             $calculationMethods = CalculationMethod::whereNotIn('id', $hotelCalculationMethodIds)
                 ->get();
         } else {
             $calculationMethods = CalculationMethod::all();
         }
-
 
         return view('livewire.hotels.integration1', compact('hotelCalculationMethods', 'calculationMethods'));
     }

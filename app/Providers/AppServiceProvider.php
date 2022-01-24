@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class AppServiceProvider extends ServiceProvider
@@ -64,6 +65,14 @@ class AppServiceProvider extends ServiceProvider
                 'title' => $title,
                 'message' => $message,
             ]);
+        });
+
+        Str::macro('setPrice', function ($value) {
+            return $value * 100;
+        });
+
+        Str::macro('getPrice', function ($value) {
+            return $value / 100;
         });
 
         /*view()->composer('components.notification', function($view) {

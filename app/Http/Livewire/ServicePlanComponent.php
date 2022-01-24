@@ -12,13 +12,17 @@ class ServicePlanComponent extends Component
     use WithPagination;
 
     public $hotelId;
+    public $servicePlanId;
     public $name;
     public $sunday_wage;
     public $model;
+    public $showMethods = false;
 
     public ServicePlan $servicePlan;
 
     public $showEditModal = false;
+
+    protected $listeners = ['closeModal' => 'closeMethods'];
 
     public function rules()
     {
@@ -32,9 +36,20 @@ class ServicePlanComponent extends Component
             ],
             'sunday_wage' => [
                 'required',
-                'integer'
+                'numeric'
             ]
         ];
+    }
+
+    public function closeMethods()
+    {
+        $this->showMethods = false;
+    }
+
+    public function methods($id)
+    {
+        $this->servicePlanId = $id;
+        $this->showMethods = true;
     }
 
 
@@ -67,7 +82,7 @@ class ServicePlanComponent extends Component
 
         $insert = $this->servicePlan->create([
             'name' => $this->name,
-            'sunday_wage' => $this->sunday_wage,
+            'sunday_wage' => $this->sunday_wage * 100,
             'hotel_id' => $this->hotelId
         ]);
 
@@ -87,7 +102,7 @@ class ServicePlanComponent extends Component
         $this->servicePlan = $servicePlan;
 
         $this->name = $servicePlan->name;
-        $this->sunday_wage = $servicePlan->sunday_wage;
+        $this->sunday_wage = $servicePlan->sunday_wage / 100;
 
         $this->showEditModal = true;
     }
@@ -98,7 +113,7 @@ class ServicePlanComponent extends Component
 
         $update = $this->servicePlan->update([
             'name' => $this->name,
-            'sunday_wage' => $this->sunday_wage,
+            'sunday_wage' => $this->sunday_wage * 100,
         ]);
 
         if ($update) {

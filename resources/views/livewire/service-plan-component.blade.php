@@ -22,6 +22,7 @@
                             <tr>
                                 <x-table.td>{{ $servicePlan->name }}</x-table.td>
                                 <x-table.td>
+                                    <x-links.default wire:click="methods({{ $servicePlan->id }})" class="border-r mr-1">{{ __('language.manage') }}</x-links.default>
                                     <x-links.default wire:click="edit({{ $servicePlan->id }})" class="border-r mr-1">{{ __('language.edit') }}</x-links.default>
                                     <x-links.default wire:click="destroy({{ $servicePlan->id }})" onclick="return confirm('{{ __('language.are_you_sure') }}') || event.stopImmediatePropagation()">{{ __('language.delete') }}</x-links.default>
                                 </x-table.td>
@@ -45,8 +46,8 @@
                 <x-modal.dialog wire:model.defer="showEditModal">
                     <x-slot name="title">{{ __('language.edit') }}</x-slot>
                     <x-slot name="content">
-                        <x-form.input id="name" type="text" wire:model="name" placeholder="{{ __('language.name') }}" />
-                        <x-form.input id="sunday-wage" type="number" wire:model="sunday_wage" placeholder="{{ __('language.sunday_wage') }}" />
+                        <x-form.input type="text" wire:model="name" placeholder="{{ __('language.name') }}" />
+                        <x-form.input type="number" min="0" step="0.01" wire:model="sunday_wage" placeholder="{{ __('language.sunday_wage') }}" />
                     </x-slot>
                     <x-slot name="footer">
                         <x-form.button type="reset" color="red" wire:click="$set('showEditModal', false)">
@@ -58,6 +59,9 @@
                     </x-slot>
                 </x-modal.dialog>
             </form>
+            @if($showMethods)
+                <livewire:hotels.integration2 :hotelId="$hotelId" :servicePlanId="$servicePlanId" />
+            @endif
         </div>
     </div>
 </div>
