@@ -17,10 +17,10 @@ class CreateServicePlanCalculationMethod extends Migration
             $table->id();
             $table->foreignId('service_plan_id')->constrained('service_plans', 'id')->onDelete('cascade');
             $table->foreignId('calculation_method_id')->constrained('calculation_methods', 'id')->onDelete('cascade');
-            $table->integer('price');
-            $table->integer('price_2');
-            $table->time('time');
-            $table->time('time_2');
+            $table->integer('price')->nullable();
+            $table->integer('price_2')->nullable();
+            $table->time('time')->nullable();
+            $table->time('time_2')->nullable();
             $table->timestamps();
         });
     }
