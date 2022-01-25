@@ -2,8 +2,8 @@
     <x-slot name="header">
         {{ __($hotel->name) }}
         <span class="float-right">
-            <x-links.button href="{{ route('hotels.index') }}" do="list">{{ __('language.hotels') }}</x-links.button>
-        </span>
+            <x-links.button href="{{ route('inputs', ['hotel' => $hotel->id]) }}" do="update">{{ __('language.inputs') }}</x-links.button>
+            <x-links.button href="{{ route('hotels.index') }}" do="list">{{ __('language.hotels') }}</x-links.button></span>
     </x-slot>
     <div class="py-6">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">

@@ -53,7 +53,6 @@ class ServicePlanComponent extends Component
         $this->showMethods = true;
     }
 
-
     public function destroy(ServicePlan $servicePlan)
     {
         $delete = $servicePlan->delete();
