@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\ServicePlan;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ServicePlansTableSeeder extends Seeder
 {
@@ -17,13 +18,13 @@ class ServicePlansTableSeeder extends Seeder
         ServicePlan::create([
             'name' => 'Zimmer',
             'hotel_id' => 1,
-            'sunday_wage' => rand(10, 30),
+            'sunday_wage' => Str::setPrice(rand(30, 60)),
         ]);
 
         ServicePlan::create([
             'name' => 'Suite',
             'hotel_id' => 1,
-            'sunday_wage' => rand(30, 60),
+            'sunday_wage' => Str::setPrice(rand(30, 60)),
         ]);
     }
 }
