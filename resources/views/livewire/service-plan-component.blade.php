@@ -60,7 +60,7 @@
                 </x-modal.dialog>
             </form>
             @if($showMethods)
-                <livewire:hotels.integration2 :hotelId="$hotelId" :servicePlanId="$servicePlanId" />
+                <livewire:hotels.service-plan-calculation-method-component :hotelId="$hotelId" :servicePlanId="$servicePlanId" />
             @endif
         </div>
     </div>

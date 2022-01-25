@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Integration1 extends Component
+class HotelCalculationMethodComponent extends Component
 {
     use WithPagination;
 
@@ -124,6 +124,6 @@ class Integration1 extends Component
             $calculationMethods = CalculationMethod::all();
         }
 
-        return view('livewire.hotels.integration1', compact('hotelCalculationMethods', 'calculationMethods'));
+        return view('livewire.hotels.hotel-calculation-method-component', compact('hotelCalculationMethods', 'calculationMethods'));
     }
 }

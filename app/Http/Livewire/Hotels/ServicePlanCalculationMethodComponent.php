@@ -8,7 +8,7 @@ use App\Models\ServicePlan;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Integration2 extends Component
+class ServicePlanCalculationMethodComponent extends Component
 {
     public $hotelId;
     public $servicePlanId;
@@ -231,6 +231,6 @@ class Integration2 extends Component
             $availableMethods = $this->availableMethods() ?? [];
         }
 
-        return view('livewire.hotels.integration2', compact('availableMethods', 'selectedMethods'));
+        return view('livewire.hotels.service-plan-calculation-method-component', compact('availableMethods', 'selectedMethods'));
     }
 }

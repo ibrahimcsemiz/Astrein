@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ServicePlan;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -82,7 +83,7 @@ class ServicePlanComponent extends Component
 
         $insert = $this->servicePlan->create([
             'name' => $this->name,
-            'sunday_wage' => $this->sunday_wage * 100,
+            'sunday_wage' => Str::setPrice($this->sunday_wage),
             'hotel_id' => $this->hotelId
         ]);
 
@@ -102,7 +103,7 @@ class ServicePlanComponent extends Component
         $this->servicePlan = $servicePlan;
 
         $this->name = $servicePlan->name;
-        $this->sunday_wage = $servicePlan->sunday_wage / 100;
+        $this->sunday_wage = Str::getPrice($servicePlan->sunday_wage);
 
         $this->showEditModal = true;
     }
@@ -113,7 +114,7 @@ class ServicePlanComponent extends Component
 
         $update = $this->servicePlan->update([
             'name' => $this->name,
-            'sunday_wage' => $this->sunday_wage * 100,
+            'sunday_wage' => Str::setPrice($this->sunday_wage),
         ]);
 
         if ($update) {
