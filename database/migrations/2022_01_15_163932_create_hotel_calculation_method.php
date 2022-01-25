@@ -17,7 +17,7 @@ class CreateHotelCalculationMethod extends Migration
             $table->id();
             $table->foreignId('calculation_method_id')->constrained('calculation_methods', 'id')->onDelete('cascade');
             $table->foreignId('hotel_id')->constrained('hotels', 'id')->onDelete('cascade');
-            $table->integer('hourly_wage');
+            $table->integer('hourly_wage')->nullable();
             $table->timestamps();
         });
     }

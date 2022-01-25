@@ -17,7 +17,7 @@ class CreateServicePlansTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('hotel_id')->constrained('hotels', 'id')->onDelete('cascade');
-            $table->integer('sunday_wage');
+            $table->integer('sunday_wage')->nullable();
             $table->timestamps();
         });
     }
