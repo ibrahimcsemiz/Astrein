@@ -59,6 +59,6 @@ class WorkerComponent extends Component
             $users = [];
         }
 
-        return view('livewire.workers-component', compact($this->hotelId, 'employees', 'users'));
+        return view('livewire.worker-component', compact($this->hotelId, 'employees', 'users'));
     }
 }
