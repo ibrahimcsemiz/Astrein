@@ -79,7 +79,7 @@
         </x-slot>
         <x-slot name="footer">
             <x-form.button type="button" color="red" wire:click="$emit('closeModal')">
-                {{ __('language.cancel') }}
+                {{ __('language.close') }}
             </x-form.button>
             <x-form.button color="green" type="submit">
                 {{ __('language.save') }}
