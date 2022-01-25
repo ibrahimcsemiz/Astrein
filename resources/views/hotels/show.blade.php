@@ -35,8 +35,8 @@
             </div>
         </div>
         <div class="max-w-full mx-auto sm:px-6 lg:px-8 mt-1 flex">
-            <livewire:workers-component :hotelId="$hotel->id" />
-            <livewire:hotels.hotel-calculation-method-component :hotelId="$hotel->id" />
+            <livewire:worker-component :hotelId="$hotel->id" />
+            <livewire:hotel-calculation-method-component :hotelId="$hotel->id" />
             <livewire:service-plan-component :hotelId="$hotel->id" />
         </div>
     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Livewire\Component;
 
-class WorkersComponent extends Component
+class WorkerComponent extends Component
 {
     public $hotelId;
 
