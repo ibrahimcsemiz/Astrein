@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Hotels;
+namespace App\Http\Livewire;
 
 use App\Models\CalculationMethod;
 use App\Models\Hotel;
@@ -231,6 +231,6 @@ class ServicePlanCalculationMethodComponent extends Component
             $availableMethods = $this->availableMethods() ?? [];
         }
 
-        return view('livewire.hotels.service-plan-calculation-method-component', compact('availableMethods', 'selectedMethods'));
+        return view('livewire.service-plan-calculation-method-component', compact('availableMethods', 'selectedMethods'));
     }
 }

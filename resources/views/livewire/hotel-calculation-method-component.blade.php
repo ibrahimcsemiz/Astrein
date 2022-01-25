@@ -48,14 +48,14 @@
                     <x-slot name="title">{{ $model == 'store' ? __('language.add') : __('language.edit') . ' ' . $calculationMethod?->name}}</x-slot>
                     <x-slot name="content">
                         @if($model == 'store')
-                        <x-form.select wire:model="calculationMethodId" id="calculation_method_id" name="calculation_method_id" required>
-                            <x-slot name="options">
-                                <option value="">{{ __('language.select_a_calculation_method') }}</option>
-                                @foreach($calculationMethods as $calculationMethod)
-                                    <option value="{{ $calculationMethod->id }}">{{ $calculationMethod->name }}</option>
-                                @endforeach
-                            </x-slot>
-                        </x-form.select>
+                            <x-form.select wire:model="calculationMethodId" id="calculation_method_id" name="calculation_method_id" required>
+                                <x-slot name="options">
+                                    <option value="">{{ __('language.select_a_calculation_method') }}</option>
+                                    @foreach($calculationMethods as $calculationMethod)
+                                        <option value="{{ $calculationMethod->id }}">{{ $calculationMethod->name }}</option>
+                                    @endforeach
+                                </x-slot>
+                            </x-form.select>
                         @endif
                         @if($model == 'save')
                             <x-form.input type="hidden" wire:model="pivot" />

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Calculation Methods for Hotels
- */
-
-namespace App\Http\Livewire\Hotels;
+namespace App\Http\Livewire;
 
 use App\Models\CalculationMethod;
 use App\Models\Hotel;
@@ -124,6 +120,6 @@ class HotelCalculationMethodComponent extends Component
             $calculationMethods = CalculationMethod::all();
         }
 
-        return view('livewire.hotels.hotel-calculation-method-component', compact('hotelCalculationMethods', 'calculationMethods'));
+        return view('livewire.hotel-calculation-method-component', compact('hotelCalculationMethods', 'calculationMethods'));
     }
 }
