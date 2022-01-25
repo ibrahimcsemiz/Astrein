@@ -45,7 +45,7 @@
             </div>
             <form wire:submit.prevent="{{ $model }}">
                 <x-modal.dialog wire:model.defer="showEditModal">
-                    <x-slot name="title">{{ $model == 'store' ? __('language.add') : __('language.edit') . ' ' . $calculationMethod->name}}</x-slot>
+                    <x-slot name="title">{{ $model == 'store' ? __('language.add') : __('language.edit') . ' ' . $calculationMethod?->name}}</x-slot>
                     <x-slot name="content">
                         @if($model == 'store')
                         <x-form.select wire:model="calculationMethodId" id="calculation_method_id" name="calculation_method_id" required>
