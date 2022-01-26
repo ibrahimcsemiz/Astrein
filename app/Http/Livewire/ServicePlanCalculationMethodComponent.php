@@ -40,6 +40,11 @@ class ServicePlanCalculationMethodComponent extends Component
         ];
     }
 
+    public function updatedShowModal()
+    {
+        $this->emitUp('closeModal');
+    }
+
     public function mount()
     {
         $this->servicePlan = ServicePlan::findOrFail($this->servicePlanId);

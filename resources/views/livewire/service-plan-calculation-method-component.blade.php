@@ -1,5 +1,5 @@
-<x-modal.dialog wire:model.defer="showModal">
-    <form wire:submit.prevent="{{ $model }}">
+<form wire:submit.prevent="{{ $model }}">
+    <x-modal.dialog wire:model="showModal">
         <x-slot name="title">{{ $model == 'store' ? __('language.add') : __('language.edit') }}</x-slot>
         <x-slot name="content">
             <x-form.select wire:model.live="calculationMethodId">
@@ -85,5 +85,6 @@
                 {{ __('language.save') }}
             </x-form.button>
         </x-slot>
-    </form>
-</x-modal.dialog>
+    </x-modal.dialog>
+</form>
+
