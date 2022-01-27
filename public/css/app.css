@@ -636,6 +636,9 @@ select {
 .float-right {
   float: right;
 }
+.m-0 {
+  margin: 0px;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1084,6 +1087,12 @@ select {
 }
 .p-3 {
   padding: 0.75rem;
+}
+.p-9 {
+  padding: 2.25rem;
+}
+.p-0 {
+  padding: 0px;
 }
 .px-4 {
   padding-left: 1rem;

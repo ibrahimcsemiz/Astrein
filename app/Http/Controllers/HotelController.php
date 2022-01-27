@@ -16,6 +16,13 @@ class HotelController extends Controller
         return view('hotels.index');
     }
 
+    public function inputs(Hotel $hotel)
+    {
+        return view('hotels.inputs', [
+            'hotel' => $hotel
+        ]);
+    }
+
     public function create()
     {
         $managers = User::where('function', 'Manager')->get();

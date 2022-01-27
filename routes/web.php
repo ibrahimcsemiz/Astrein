@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('hotels', HotelController::class);
     Route::resource('calculation-methods', CalculationMethodController::class);
 
-    Route::get('/inputs/{hotel}', InputComponent::class)->name('inputs');
+    Route::get('/inputs/{hotel}', [HotelController::class, 'inputs'])->name('inputs');
+
     //Route::get('/users', UserComponent::class)->name('users');
     //Route::get('/employees', EmployeeComponent::class)->name('employees');
     //Route::get('/hotels', HotelComponent::class)->name('hotels');

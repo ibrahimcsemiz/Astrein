@@ -75,6 +75,15 @@ class AppServiceProvider extends ServiceProvider
             return $value / 100;
         });
 
+        Str::macro('months', function () {
+            for ($i = 1; $i <= 12; $i++) {
+                $months[] = str_pad($i, 2, "0", STR_PAD_LEFT);
+            }
+
+            return $months;
+        });
+
+
         /*view()->composer('components.notification', function($view) {
             $view->with('count', User::count());
         });*/
