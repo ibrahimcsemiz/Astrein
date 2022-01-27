@@ -18,8 +18,8 @@ class CreateInputsTable extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade');
             $table->foreignId('service_plan_id')->constrained('service_plans', 'id')->onDelete('cascade');
             $table->date('day');
-            $table->integer('value');
-            $table->integer('value_2');
+            $table->integer('value')->nullable();
+            $table->integer('value_2')->nullable();
             $table->timestamps();
         });
     }
