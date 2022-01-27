@@ -82,15 +82,5 @@ class AppServiceProvider extends ServiceProvider
 
             return $months;
         });
-
-
-        /*view()->composer('components.notification', function($view) {
-            $view->with('count', User::count());
-        });*/
-
-        /*view()->composer('components.notification', function ($view) {
-            $messages = self::messages();
-            return $view->with('messages', $messages);
-        });*/
     }
 }

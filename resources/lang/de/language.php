@@ -75,5 +75,8 @@ return [
     'time' => 'Time',
     'price_2' => 'Price 2',
     'time_2' => 'Time 2',
-    'close' => 'Close'
+    'close' => 'Close',
+    'inputs' => 'Inputs',
+    'show' => 'Show',
+    'hide' => 'Hide',
 ];
