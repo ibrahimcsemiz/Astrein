@@ -14,6 +14,7 @@ class InputComponent extends Component
     public $year;
     public $days;
     public $inputs = [];
+    public $show = [];
 
     public Hotel $hotel;
 
@@ -25,6 +26,9 @@ class InputComponent extends Component
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
 
         $this->hotel = Hotel::findOrFail($this->hotelId);
+
+        $this->show['status'] = false;
+        $this->show['text'] = __('language.show');
     }
 
     public function createInputs()
@@ -39,6 +43,12 @@ class InputComponent extends Component
                 $this->inputs[$employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day]['value_2'] = $this->getInputValue($employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day)['value_2'];
             }
         }
+    }
+
+    public function show()
+    {
+        $this->show['status'] = !$this->show['status'];
+        $this->show['text'] = $this->show['status'] ? __('language.hide') : __('language.show');
     }
 
     public function updatedMonth()

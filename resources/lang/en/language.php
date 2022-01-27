@@ -77,4 +77,6 @@ return [
     'time_2' => 'Time 2',
     'close' => 'Close',
     'inputs' => 'Inputs',
+    'show' => 'Show',
+    'hide' => 'Hide',
 ];
