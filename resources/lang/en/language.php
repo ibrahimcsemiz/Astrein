@@ -79,4 +79,7 @@ return [
     'inputs' => 'Inputs',
     'show' => 'Show',
     'hide' => 'Hide',
+    'sheets' => 'Sheets',
+    'daily_sheets' => 'Daily Reports',
+    'monthly_sheets' => 'Monthly Reports',
 ];
