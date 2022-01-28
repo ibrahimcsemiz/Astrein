@@ -53,6 +53,10 @@ class InputComponent extends Component
 
     public function updatedMonth()
     {
+        $this->month = empty($this->month)
+            ? date('m')
+            : $this->month;
+
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
 
         $this->createInputs();
@@ -60,6 +64,10 @@ class InputComponent extends Component
 
     public function updatedYear()
     {
+        $this->year = empty($this->year)
+            ? date('Y')
+            : $this->year;
+
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
 
         $this->createInputs();

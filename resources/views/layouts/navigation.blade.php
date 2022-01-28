@@ -28,7 +28,7 @@
                     <x-navigation.link href="{{ route('hotels.index') }}" active="{{ request()->routeIs('hotels*') }}">
                         {{ __('language.hotels') }}
                     </x-navigation.link>
-                    <x-navigation.link href="#" active="{{ request()->routeIs('sheets*') }}">
+                    <x-navigation.link href="{{ route('sheets') }}" active="{{ request()->routeIs('sheets*') }}">
                         {{ __('language.sheets') }}
                     </x-navigation.link>
                 </x-slot>
@@ -80,7 +80,7 @@
             <x-navigation.link class="block text-base" href="{{ route('hotels.index') }}" active="{{ request()->routeIs('hotels*') }}">
                 {{ __('language.hotels') }}
             </x-navigation.link>
-            <x-navigation.link class="block text-base" href="#" active="{{ request()->routeIs('sheets*') }}">
+            <x-navigation.link class="block text-base" href="{{ route('sheets') }}" active="{{ request()->routeIs('sheets*') }}">
                 {{ __('language.sheets') }}
             </x-navigation.link>
         </x-slot>

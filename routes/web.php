@@ -4,6 +4,7 @@ use App\Http\Controllers\CalculationMethodController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\SheetController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\InputComponent;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('calculation-methods', CalculationMethodController::class);
 
     Route::get('/inputs/{hotel}', [HotelController::class, 'inputs'])->name('inputs');
+    Route::get('/sheets', [SheetController::class, 'index'])->name('sheets');
 
     //Route::get('/users', UserComponent::class)->name('users');
     //Route::get('/employees', EmployeeComponent::class)->name('employees');

@@ -52,11 +52,11 @@
                 @foreach($employees as $employee)
                 <tr>
                     @if($show['status'] == true)
-                        <x-table.td class="text-center bg-indigo-50 font-semibold" rowspan="2">
+                        <x-table.td class="text-center bg-indigo-50 font-semibold px-0 py-0" rowspan="2">
                             {{ $employee->name }}
                         </x-table.td>
                     @else
-                        <x-table.td class="text-center bg-indigo-50 font-semibold">
+                        <x-table.td class="text-center bg-indigo-50 font-semibold px-0 py-0">
                             {{ $employee->name }}
                         </x-table.td>
                     @endif
@@ -64,19 +64,19 @@
                         @php
                             $day = str_pad($day, 2, "0", STR_PAD_LEFT);
                         @endphp
-                        <x-table.td>
-                            <x-form.input class="p-1" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value" type="text" />
+                        <x-table.td class="px-0 py-0">
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
                 @if($show['status'] == true)
-                <tr>
+                <tr">
                     @foreach(range(1, $days) as $day)
                         @php
                             $day = str_pad($day, 2, "0", STR_PAD_LEFT);
                         @endphp
-                        <x-table.td>
-                            <x-form.input class="p-1" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value_2' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value_2" type="text" />
+                        <x-table.td class="px-0 py-0 mr-1">
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value_2' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value_2" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
