@@ -34,7 +34,7 @@ class Employee extends Model
         return $this->hasOne(PersonalInformation::class, 'user_id', 'id');
     }
 
-    public function calculationMethods()
+    /*public function calculationMethods()
     {
         $s = 0;
         foreach ($this->hotel[0]->servicePlans ?? [] as $servicePlan) {
@@ -52,5 +52,10 @@ class Employee extends Model
         $calculationMethods = ($calculationMethods ?? false) ? collect($calculationMethods)->flatten(1) : [];
 
         return $calculationMethods ?? [];
+    }*/
+
+    public function calculationMethods()
+    {
+        return CalculationMethod::all();
     }
 }

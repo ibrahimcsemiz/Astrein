@@ -45,8 +45,8 @@
                                             <x-form.select id="calculation_method_id" name="calculation_method_id" required>
                                                 <x-slot name="options">
                                                     <option value="">{{ __('language.select_a_calculation_method') }}</option>
-                                                    @foreach($calculationMethods as $cm)
-                                                        <option value="{{ $cm['calculation_method_id'] }}"{{ $employee->personal->calculation_method_id ?? 0 == $cm['calculation_method_id'] ? ' selected' : '' }}>{{ $cm['service_plan_name'] }} / {{ $cm['calculation_method_name'] }}</option>
+                                                    @foreach($calculationMethods as $calculationMethod)
+                                                        <option value="{{ $calculationMethod->id }}"{{ ($employee->personal->calculation_method_id ?? 0) === $calculationMethod->id ? ' selected' : '' }}>{{ $calculationMethod->name  }}</option>
                                                     @endforeach
                                                 </x-slot>
                                             </x-form.select>
