@@ -67,17 +67,6 @@ class InputComponent extends Component
         }
     }
 
-    public function getInputValue($key)
-    {
-        $input = Input::select('value', 'value_2', 'input_key')->where('input_key', $key)
-            ->first();
-
-        return [
-            'value' => $input->value ?? 0,
-            'value_2' => $input->value_2 ?? 0,
-        ];
-    }
-
     public function getInputs()
     {
         return Input::select('value', 'value_2', 'input_key')
