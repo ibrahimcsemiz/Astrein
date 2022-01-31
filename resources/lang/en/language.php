@@ -82,4 +82,6 @@ return [
     'sheets' => 'Sheets',
     'daily_sheets' => 'Daily Reports',
     'monthly_sheets' => 'Monthly Reports',
+    'select_hotel' => 'Select Hotel',
+    'select_employee' => 'Select Employee',
 ];

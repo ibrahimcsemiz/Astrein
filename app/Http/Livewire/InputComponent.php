@@ -13,8 +13,9 @@ class InputComponent extends Component
     public $month;
     public $year;
     public $days;
-    public $inputs = [];
     public $show = [];
+    public $employees = [];
+    public $values = [];
 
     public Hotel $hotel;
 
@@ -27,22 +28,10 @@ class InputComponent extends Component
 
         $this->hotel = Hotel::findOrFail($this->hotelId);
 
+        $this->employees = $this->hotel->employees()->select('users.id', 'users.name')->get();
+
         $this->show['status'] = false;
         $this->show['text'] = __('language.show');
-    }
-
-    public function createInputs()
-    {
-        $employees = $this->hotel->employees()->get()->pluck('id')->toArray();
-
-        foreach ($employees as $employee) {
-            foreach(range(1, $this->days) as $day) {
-                $day = str_pad($day, 2, "0", STR_PAD_LEFT);
-
-                $this->inputs[$employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day]['value'] = $this->getInputValue($employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day)['value'];
-                $this->inputs[$employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day]['value_2'] = $this->getInputValue($employee . '_' . $this->servicePlanId . '_' . $this->year . '-' . $this->month . '-' . $day)['value_2'];
-            }
-        }
     }
 
     public function show()
@@ -58,8 +47,6 @@ class InputComponent extends Component
             : $this->month;
 
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
-
-        $this->createInputs();
     }
 
     public function updatedYear()
@@ -69,50 +56,55 @@ class InputComponent extends Component
             : $this->year;
 
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
-
-        $this->createInputs();
     }
 
     public function updatedServicePlanId()
     {
         $this->days = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
 
-        $this->createInputs();
+        foreach ($this->getInputs() as $val) {
+            $this->values[$val->input_key] = [$val->value, $val->value_2];
+        }
     }
 
     public function getInputValue($key)
     {
-        $spl = explode('_', $key);
-        $employee = $spl[0];
-
-        $day = $spl[2];
-
-        $input = Input::where('user_id', $employee)
-            ->where('service_plan_id', $this->servicePlanId)
-            ->where('day', $day)
-            ->get();
+        $input = Input::select('value', 'value_2', 'input_key')->where('input_key', $key)
+            ->first();
 
         return [
-            'value' => $input[0]->value ?? 0,
-            'value_2' => $input[0]->value_2 ?? 0,
+            'value' => $input->value ?? 0,
+            'value_2' => $input->value_2 ?? 0,
         ];
     }
 
-    public function storeInputs($employee, $day, $type)
+    public function getInputs()
     {
+        return Input::select('value', 'value_2', 'input_key')
+            ->where('service_plan_id', $this->servicePlanId)
+            ->get();
+    }
+
+    public function storeInputs($key, $type, $value)
+    {
+        $spl = explode(':', $key);
+        $employee = $spl[0];
+        $day = $spl[2];
+
         Input::updateOrCreate([
             'user_id' => $employee,
             'service_plan_id' => $this->servicePlanId,
             'day' => $day,
+            'input_key' => $key
         ], [
-            $type => $this->inputs[$employee . '_' . $this->servicePlanId . '_' . $day][$type] ?? 0,
+            $type => $value ?? 0,
         ]);
     }
 
     public function render()
     {
-        $servicePlans = $this->hotel->servicePlans()->get();
-        $employees = $this->hotel->employees()->get();
+        $servicePlans = $this->hotel->servicePlans()->select('service_plans.id', 'service_plans.name')->get();
+        $employees = $this->employees;
 
         return view('livewire.input-component', compact('servicePlans', 'employees'));
     }

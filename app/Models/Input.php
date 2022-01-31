@@ -15,5 +15,6 @@ class Input extends Model
         'day',
         'value',
         'value_2',
+        'input_key',
     ];
 }

@@ -34,7 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('calculation-methods', CalculationMethodController::class);
 
     Route::get('/inputs/{hotel}', [HotelController::class, 'inputs'])->name('inputs');
-    Route::get('/sheets', [SheetController::class, 'index'])->name('sheets');
+
+    Route::group(['as' => 'sheets.', 'prefix' => 'sheets'], function () {
+        Route::get('/sheets', [SheetController::class, 'index'])->name('index');
+        Route::get('/sheets/inputs/{type}', [SheetController::class, 'inputs'])->name('');
+    });
 
     //Route::get('/users', UserComponent::class)->name('users');
     //Route::get('/employees', EmployeeComponent::class)->name('employees');

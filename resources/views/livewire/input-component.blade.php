@@ -63,9 +63,10 @@
                     @foreach(range(1, $days) as $day)
                         @php
                             $day = str_pad($day, 2, "0", STR_PAD_LEFT);
+                            $inputKey = $employee->id . ':' . $servicePlanId . ':' . $year . '-' . $month . '-' . $day;
                         @endphp
                         <x-table.td class="px-0 py-0">
-                            <x-form.input class="p-1 rounded-none border-none" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value" type="text" />
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.10000ms="storeInputs('{{ $inputKey }}', '{{ 'value' }}', $event.target.value)" value="{{ $values[$inputKey][0] ?? 0 }}" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
@@ -74,9 +75,10 @@
                     @foreach(range(1, $days) as $day)
                         @php
                             $day = str_pad($day, 2, "0", STR_PAD_LEFT);
+                            $inputKey = $employee->id . ':' . $servicePlanId . ':' . $year . '-' . $month . '-' . $day;
                         @endphp
                         <x-table.td class="px-0 py-0 mr-1">
-                            <x-form.input class="p-1 rounded-none border-none" wire:keyup="storeInputs({{ $employee->id }}, '{{ $year . '-' . $month . '-' . $day }}', '{{ 'value_2' }}')" wire:model="inputs.{{ $employee->id . '_' . $servicePlanId . '_' . $year . '-' . $month . '-' . $day }}.value_2" type="text" />
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.10000ms="storeInputs('{{ $inputKey }}', '{{ 'value_2' }}', $event.target.value)" value="{{ $values[$inputKey][1] ?? 0 }}" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
