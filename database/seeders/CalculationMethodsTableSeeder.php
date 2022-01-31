@@ -14,7 +14,7 @@ class CalculationMethodsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 4; $i++) {
             $insertCalculationMethod = CalculationMethod::create([
                 'name' => 'Test Method ' . $i,
                 'calculation_per_minute' => 1,

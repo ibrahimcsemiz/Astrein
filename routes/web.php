@@ -36,8 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/inputs/{hotel}', [HotelController::class, 'inputs'])->name('inputs');
 
     Route::group(['as' => 'sheets.', 'prefix' => 'sheets'], function () {
-        Route::get('/sheets', [SheetController::class, 'index'])->name('index');
-        Route::get('/sheets/inputs/{type}', [SheetController::class, 'inputs'])->name('inputs');
+        Route::get('/', [SheetController::class, 'index'])->name('index');
+        Route::get('/inputs/employee', [SheetController::class, 'inputsByEmployee'])->name('inputs.employee');
     });
 
     //Route::get('/users', UserComponent::class)->name('users');

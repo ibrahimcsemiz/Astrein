@@ -36,13 +36,20 @@ class Employee extends Model
 
     public function calculationMethods()
     {
-        $i = 0;
-        foreach ($this->hotel[0]->servicePlans as $servicePlan) {
-            $calculationMethods[$i]['service_plan_name'] = $servicePlan->name;
-            $calculationMethods[$i]['calculation_method_id'] = $servicePlan->calculationMethods[0]->pivot->id;
-            $calculationMethods[$i]['calculation_method_name'] = $servicePlan->calculationMethods[0]->name;
-            $i++;
+        $s = 0;
+        foreach ($this->hotel[0]->servicePlans ?? [] as $servicePlan) {
+            $i = 0;
+            $calculationMethods[] = [];
+            foreach ($servicePlan->calculationMethods as $calculationMethod) {
+                $calculationMethods[$s][$i]['service_plan_name'] = $servicePlan->name;
+                $calculationMethods[$s][$i]['calculation_method_id'] = $calculationMethod->pivot->id;
+                $calculationMethods[$s][$i]['calculation_method_name'] = $calculationMethod->name;
+                $i++;
+            }
+            $s++;
         }
+
+        $calculationMethods = ($calculationMethods ?? false) ? collect($calculationMethods)->flatten(1) : [];
 
         return $calculationMethods ?? [];
     }

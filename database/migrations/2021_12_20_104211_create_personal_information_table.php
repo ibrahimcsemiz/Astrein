@@ -17,7 +17,7 @@ class CreatePersonalInformationTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->date('birth_date')->nullable();
-            $table->date('calculation_method_id')->nullable();
+            $table->unsignedInteger('calculation_method_id')->nullable();
             $table->timestamps();
         });
     }
