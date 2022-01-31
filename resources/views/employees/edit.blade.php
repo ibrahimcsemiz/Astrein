@@ -37,10 +37,21 @@
 
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                                             <x-form.label>{{ __('language.birth_date') }}</x-form.label>
-                                            <x-form.input id="birth_date" type="date" name="birth_date" value="{{ $employee->personal->birth_date }}" />
+                                            <x-form.input id="birth_date" type="date" name="birth_date" value="{{ $employee->personal->birth_date ?? '' }}" />
                                         </div>
 
-                                        <div class="col-span-6">
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <x-form.label required>{{ __('language.calculation_methods') }}</x-form.label>
+                                            <x-form.select id="calculation_method_id" name="calculation_method_id" required>
+                                                <x-slot name="options">
+                                                    <option value="">{{ __('language.select_a_calculation_method') }}</option>
+                                                    @foreach($calculationMethods as $cm)
+                                                        <option value="{{ $cm['calculation_method_id'] }}"{{ $employee->personal->calculation_method_id ?? '' == $cm['calculation_method_id'] ? ' selected' : '' }}>{{ $cm['service_plan_name'] }} / {{ $cm['calculation_method_name'] }}</option>
+                                                    @endforeach
+                                                </x-slot>
+                                            </x-form.select>
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
                                             <x-form.label>{{ __('language.address') }}</x-form.label>
                                             <x-form.input id="address" type="text" name="address" value="{{ $employee->contact->address }}" />
                                         </div>

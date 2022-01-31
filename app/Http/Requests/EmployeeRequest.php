@@ -54,6 +54,10 @@ class EmployeeRequest extends FormRequest
                 'nullable',
                 'date'
             ],
+            'calculation_method_id' => [
+                'nullable',
+                'integer'
+            ]
         ];
     }
 }

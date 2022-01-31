@@ -13,6 +13,7 @@ class PersonalInformation extends Model
 
     protected $fillable = [
         'birth_date',
+        'calculation_method_id',
     ];
 
     public function user()

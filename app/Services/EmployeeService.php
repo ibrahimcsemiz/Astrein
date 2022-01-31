@@ -28,7 +28,8 @@ class EmployeeService
             ]);
 
             $insertPersonalInformation = $insertEmployee->personal()->create([
-                'birth_date' => $request->birth_date
+                'birth_date' => $request->birth_date,
+                'calculation_method_id' => $request->calculation_method_id,
             ]);
 
             if ($insertEmployee && $insertContactInformation && $insertPersonalInformation) {
@@ -48,14 +49,19 @@ class EmployeeService
                 'function' => 'Employee'
             ]);
 
-            $updateContactInformation = $employee->contact()->update([
+            $updateContactInformation = $employee->contact()->updateOrCreate([
+                'user_id' => $employee->id
+            ], [
                 'telephone' => $request->telephone,
                 'city' => $request->city,
                 'address' => $request->address
             ]);
 
-            $updatePersonalInformation = $employee->personal()->update([
-                'birth_date' => $request->birth_date
+            $updatePersonalInformation = $employee->personal()->updateOrCreate([
+                'user_id' => $employee->id
+            ], [
+                'birth_date' => $request->birth_date,
+                'calculation_method_id' => $request->calculation_method_id,
             ]);
 
             if ($updateEmployee && $updateContactInformation && $updatePersonalInformation) {

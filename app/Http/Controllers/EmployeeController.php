@@ -36,9 +36,11 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee)
     {
+        $calculationMethods = $employee->calculationMethods();
+
         $employee->load(['contact', 'personal']);
 
-        return view('employees.edit', compact('employee'));
+        return view('employees.edit', compact('employee', 'calculationMethods'));
     }
 
     public function update(EmployeeRequest $request, Employee $employee, EmployeeService $employeeService)

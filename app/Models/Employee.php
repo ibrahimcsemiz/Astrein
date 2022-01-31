@@ -33,4 +33,17 @@ class Employee extends Model
     {
         return $this->hasOne(PersonalInformation::class, 'user_id', 'id');
     }
+
+    public function calculationMethods()
+    {
+        $i = 0;
+        foreach ($this->hotel[0]->servicePlans as $servicePlan) {
+            $calculationMethods[$i]['service_plan_name'] = $servicePlan->name;
+            $calculationMethods[$i]['calculation_method_id'] = $servicePlan->calculationMethods[0]->pivot->id;
+            $calculationMethods[$i]['calculation_method_name'] = $servicePlan->calculationMethods[0]->name;
+            $i++;
+        }
+
+        return $calculationMethods ?? [];
+    }
 }
