@@ -28,7 +28,7 @@ class InputComponent extends Component
 
         $this->hotel = Hotel::findOrFail($this->hotelId);
 
-        $this->employees = $this->hotel->employees()->select('users.id', 'users.name')->get();
+        $this->employees = $this->hotel->employees()->select('users.id', 'users.name')->get()->load('personal');
 
         $this->show['status'] = false;
         $this->show['text'] = __('language.show');
@@ -74,7 +74,7 @@ class InputComponent extends Component
             ->get();
     }
 
-    public function storeInputs($key, $type, $value)
+    public function storeInputs($key, $calculationMethod, $type, $value)
     {
         $spl = explode(':', $key);
         $employee = $spl[0];
@@ -84,7 +84,8 @@ class InputComponent extends Component
             'user_id' => $employee,
             'service_plan_id' => $this->servicePlanId,
             'day' => $day,
-            'input_key' => $key
+            'input_key' => $key,
+            'calculation_method_id' => $calculationMethod
         ], [
             $type => $value ?? 0,
         ]);

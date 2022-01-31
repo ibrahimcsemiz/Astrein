@@ -16,5 +16,6 @@ class Input extends Model
         'value',
         'value_2',
         'input_key',
+        'calculation_method_id',
     ];
 }

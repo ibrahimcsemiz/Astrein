@@ -66,7 +66,7 @@
                             $inputKey = $employee->id . ':' . $servicePlanId . ':' . $year . '-' . $month . '-' . $day;
                         @endphp
                         <x-table.td class="px-0 py-0">
-                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.10000ms="storeInputs('{{ $inputKey }}', '{{ 'value' }}', $event.target.value)" value="{{ $values[$inputKey][0] ?? 0 }}" type="text" />
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.500ms="storeInputs('{{ $inputKey }}', {{ $employee->personal->calculation_method_id }}, '{{ 'value' }}', $event.target.value)" value="{{ $values[$inputKey][0] ?? 0 }}" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
@@ -78,7 +78,7 @@
                             $inputKey = $employee->id . ':' . $servicePlanId . ':' . $year . '-' . $month . '-' . $day;
                         @endphp
                         <x-table.td class="px-0 py-0 mr-1">
-                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.10000ms="storeInputs('{{ $inputKey }}', '{{ 'value_2' }}', $event.target.value)" value="{{ $values[$inputKey][1] ?? 0 }}" type="text" />
+                            <x-form.input class="p-1 rounded-none border-none" wire:keyup.debounce.500ms="storeInputs('{{ $inputKey }}', {{ $employee->personal->calculation_method_id }}, '{{ 'value_2' }}', $event.target.value)" value="{{ $values[$inputKey][1] ?? 0 }}" type="text" />
                         </x-table.td>
                     @endforeach
                 </tr>
