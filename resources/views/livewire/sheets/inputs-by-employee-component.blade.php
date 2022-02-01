@@ -64,14 +64,14 @@
                             </x-table.td>
                         @endforeach
                         <x-table.td>
-                            {{ gmdate('H:i:s', $row['time'] ?? 0 * 60) }}
+                            {{ \App\Helper\TimeHelper::convertMinToTime(($row['time'] ?? 0)) }}
                         </x-table.td>
                     </tr>
                 @endforeach
                     <tr>
                         <x-table.td colspan="{{ count($servicePlans) + 1 }}"></x-table.td>
                         <x-table.td class="bg-indigo-50 font-semibold">
-                            {{ gmdate('H:i:s', $rows['total_time'] ?? 0 * 60) }}
+                            {{ \App\Helper\TimeHelper::convertMinToTime(($rows['total_time'] ?? 0)) }}
                         </x-table.td>
                     </tr>
             </x-slot>
