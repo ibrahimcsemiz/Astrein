@@ -10,6 +10,7 @@
                 </x-slot>
             </x-form.select>
         </div>
+        @if($hotelId)
         <div class="w-full mr-1">
             <x-form.select wire:model.live="employeeId">
                 <x-slot name="options">
@@ -20,6 +21,8 @@
                 </x-slot>
             </x-form.select>
         </div>
+        @endif
+        @if($employeeId)
         <div class="w-full mr-1">
             <x-form.select wire:model.live="month">
                 <x-slot name="options">
@@ -39,6 +42,7 @@
                 </x-slot>
             </x-form.select>
         </div>
+        @endif
     </div>
     <div>
         @if($employeeId)
