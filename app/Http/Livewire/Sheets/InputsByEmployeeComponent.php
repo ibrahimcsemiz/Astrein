@@ -103,6 +103,8 @@ class InputsByEmployeeComponent extends Component
             $totalValues[$i]['time'] = array_sum($timeSum);
 
             $totalTimeSum[] = $totalValues[$i]['time'];
+
+            unset($timeSum);
         }
 
         $totalValues['total_time'] = array_sum($totalTimeSum);
