@@ -797,6 +797,9 @@ select {
 .w-0 {
   width: 0px;
 }
+.w-1\/12 {
+  width: 8.333333%;
+}
 .min-w-full {
   min-width: 100%;
 }

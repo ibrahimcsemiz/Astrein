@@ -9,7 +9,7 @@
     }
 @endphp
 
-<td {{ $attributes->merge(['class' => 'px-2 py-4 whitespace-nowrap ' . $b]) }}">
+<td {{ $attributes->merge(['class' => 'px-2 py-4 whitespace-nowrap ' . $b]) }}>
     <div class="text-xs text-gray-600">
         {{ $slot }}
     </div>
