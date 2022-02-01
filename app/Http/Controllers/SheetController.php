@@ -15,4 +15,9 @@ class SheetController extends Controller
     {
         return view('sheets.inputs.employee');
     }
+
+    public function inputsByHotel()
+    {
+        return view('sheets.inputs.hotel');
+    }
 }

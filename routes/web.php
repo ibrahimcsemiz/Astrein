@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['as' => 'sheets.', 'prefix' => 'sheets'], function () {
         Route::get('/', [SheetController::class, 'index'])->name('index');
         Route::get('/inputs/employee', [SheetController::class, 'inputsByEmployee'])->name('inputs.employee');
+        Route::get('/inputs/hotels', [SheetController::class, 'inputsByHotel'])->name('inputs.hotel');
     });
 
     //Route::get('/users', UserComponent::class)->name('users');
